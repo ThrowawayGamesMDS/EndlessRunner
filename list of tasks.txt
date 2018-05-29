@@ -1,0 +1,52 @@
+ART
+visual update - building textures
+main menu - 3D menu scene ?? (as opposed to 2d backgrounds aside from prompts)
+end screen - show stats - points - how many objects hit
+ingame UI - font/clock sprite etc
+ragdoll
+bonus props - breakable
+level variation
+particle effects
+pickups - timer 
+interface- controls/ information
+sounds
+
+
+PROGRAMMING
+main menu - 3D menu scene - options button - help buttons
+end screen - show stats - points - how many objects hit - return to main menu/restart
+options screen + working settings
+add new assets
+way to end game - timer
+speed system (decide whether easier to change spawning or change speed) - boosts?
+point system - combo - save stats
+fog
+sounds
+screen shake
+locally save highscores
+spawn system revision - road area/footpath
+ragdoll
+level variation
+particle effects
+timer - visible
+pickups - timer 
+interface- controls/ information
+change skybox
+car never dies - slows down/points removed/end combo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+blood?
+secondary vehicles?
+bonus gamemodes?
