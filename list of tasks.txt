@@ -16,23 +16,28 @@ PROGRAMMING
 
 end screen - show stats - points - how many objects hit - return to main menu/restart
 options screen + working settings
-add new assets
 way to end game - timer
+
+fog //fine
+screen shake //working on
+timer - visible
+pickups - timer 
+car never dies - slows down/points 
+point system
+
+removed/end combo
+add new assets
 speed system (decide whether easier to change spawning or change speed) - boosts?
 point system - combo - save stats
-fog
 sounds
-screen shake
 locally save highscores
 spawn system revision - road area/footpath
 ragdoll
 level variation
 particle effects
-timer - visible
-pickups - timer 
 interface- controls/ information
 change skybox
-car never dies - slows down/points removed/end combo
+
 
 
 
