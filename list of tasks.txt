@@ -3,17 +3,17 @@ visual update - building textures
 main menu - 3D menu scene ?? (as opposed to 2d backgrounds aside from prompts)
 end screen - show stats - points - how many objects hit
 ingame UI - font/clock sprite etc
+sounds
 ragdoll
 bonus props - breakable
 level variation
 particle effects
 pickups - timer 
 interface- controls/ information
-sounds
 
 
 PROGRAMMING
-main menu - 3D menu scene - options button - help buttons
+
 end screen - show stats - points - how many objects hit - return to main menu/restart
 options screen + working settings
 add new assets
@@ -36,7 +36,8 @@ car never dies - slows down/points removed/end combo
 
 
 
-
+mostly complete:
+main menu - 3D menu scene - options button - help buttons
 
 
 
