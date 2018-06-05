@@ -17,7 +17,9 @@ public class timer : MonoBehaviour
         timerTxt.text = Mathf.RoundToInt(gameTimer).ToString();
     }
 
-
+	public void timeIncrease(){
+		gameTimer = gameTimer + 5;
+	}
 }
 
 
