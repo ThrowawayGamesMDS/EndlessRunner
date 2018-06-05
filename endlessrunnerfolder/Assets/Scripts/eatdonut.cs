@@ -7,7 +7,6 @@ public class eatdonut : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            statistics.g_globalPoints += 1000;
             timer.gameTimer += 2;
             Destroy(gameObject);
         }

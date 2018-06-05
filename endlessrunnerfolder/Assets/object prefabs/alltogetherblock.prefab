@@ -119,7 +119,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: cb459f18b3017074f84b421351b508d7, type: 2}
   m_StaticBatchInfo:
@@ -154,7 +153,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 469a1e4c78fb4314e9ee7d4e90b207d4, type: 2}
   m_StaticBatchInfo:
@@ -229,7 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorthPoints: 0
-  worth: 500
+  objName: roadblock
+  worth: 540
 --- !u!114 &114662693444459350
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class scoring : MonoBehaviour {
-    public GameObject popup;
-	public bool lockout;
     private string lastObject;
+    public GameObject stopSignPopup;
+    public GameObject donutPopup;
+    public GameObject roadBlockPopup;
+    public GameObject roadConePopup;
+    public GameObject blueCarPopup;
+
+    public Canvas canvas;
 	void OnCollisionEnter(Collision other)
 	{
         if(other.gameObject.GetComponent<PointManager>())
@@ -14,23 +19,30 @@ public class scoring : MonoBehaviour {
             {
                 statistics.g_globalPoints += other.gameObject.GetComponent<PointManager>().worth;
                 other.gameObject.GetComponent<PointManager>().isWorthPoints = false;
-                popup.SetActive(true);
+                switch (other.gameObject.GetComponent<PointManager>().objName)
+                {
+                    case "cone":
+                        Instantiate(roadConePopup, canvas.transform);
+                        break;
+                    case "roadblock":
+                        Instantiate(roadBlockPopup, canvas.transform);
+                        break;
+                    case "bluecar":
+                        Instantiate(blueCarPopup, canvas.transform);
+                        break;
+                    case "donut":
+                        Instantiate(donutPopup, canvas.transform);
+                        break;
+                    case "stopsign":
+                        Instantiate(stopSignPopup, canvas.transform);
+                        break;
+                    default:
+                        break;
+                }
+
+                    
             }
             
         }
-	}
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            popup.SetActive(true);
-        }
-    }
-
-	IEnumerator lockoutf()
-	{
-		yield return new WaitForSeconds (0.5f);
-		lockout = false;
 	}
 }
