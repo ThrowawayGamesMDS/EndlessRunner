@@ -166,40 +166,37 @@ public class ControllerHandler : MonoBehaviour
         if (menucontroller.IsPlayingHard() == false && g_bPlayerJumping[3] && !g_bPlayerJumping[4]) // PLAYING EZY
         {
         
-            if (Input.GetAxis("LeftJoystickX_P") < 0.19)
+            if (Input.GetAxis("LeftJoystickX_P") < - 0.19)
             {
                 print("EZY TRYNA TRICK1");
-                if (Input.GetAxis("LeftJoystickX_P") < 0.19)
+                if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") > -0.65))
                 {
-                    //trey flip
-                    // var animator = this.GetComponent<Animator>();
                     anim.SetTrigger("isFlipping");
-                    print("HERE1");
+                    print("PLAYER IS TREY FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
+
+                    g_bPlayerJumping[4] = true;
                 }
-                else
-                {
-                    // anim.Play("horizontal_flip");
-                    //kick flip
+                else if (Input.GetAxis("LeftJoystickX_P") < -0.45)
+                { 
+                    anim.SetTrigger("kickFlipping");
+                    print("PLAYER IS KICK FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
+                    g_bPlayerJumping[4] = true;
                 }
-                g_bPlayerJumping[4] = true;
             }
             else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
             {
                 print("EZY TRYNA TRICK2");
-                if (Input.GetAxis("LeftJoystickX_P") > 0.19)
+                if (Input.GetAxis("LeftJoystickX_P") > 0.65 && Input.GetAxis("LeftJoystickY_P") > 0.65)
                 {
-                    //inverse trey flip
-                    //anim.Play("trey_flip");
-                    //var animator = this.GetComponent<Animator>();
                     anim.SetTrigger("isFlipping");
                     print("HERE2");
+                    g_bPlayerJumping[4] = true;
                 }
-                else
+                else if (Input.GetAxis("LeftJoystickX_P") > 0.45)
                 {
-                    //inverse kick flip
-                    // anim.Play("horizontal_flip");
+                    anim.SetTrigger("kickFlipping");
+                    g_bPlayerJumping[4] = true;
                 }
-                g_bPlayerJumping[4] = true;
             }
             // run animations
         }
