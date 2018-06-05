@@ -62,6 +62,8 @@ public class ControllerHandler : MonoBehaviour
      * g_bPlayerJumping[3] = JUMPING G
      * g_bPlayerJumping[4] = TRICKING (IN EZY MODE)
      * g_bPlayerJumping[5] = noob val for prejump
+     * g_bPlayerJumping[6] = ollie set
+     * g_bPlayerJumping[7] = nollie set
      * 
      * 
      * 
@@ -71,8 +73,8 @@ public class ControllerHandler : MonoBehaviour
 
     {
         // Jumping bool setup
-        g_bPlayerJumping = new bool[6];
-        for (int i = 0; i < 6; i++)
+        g_bPlayerJumping = new bool[8];
+        for (int i = 0; i < 8; i++)
         {
             g_bPlayerJumping[i] = false;
         }
@@ -139,7 +141,7 @@ public class ControllerHandler : MonoBehaviour
             print("EZY TRYNA TRICK1");
             if (Input.GetAxis("LeftJoystickX_P") < -0.45)
             {
-                anim.SetTrigger("kickFlipping");
+                anim.SetTrigger("invertKickFlipping");
                 print("PLAYER IS KICK FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
@@ -183,7 +185,7 @@ public class ControllerHandler : MonoBehaviour
     {
         if (!g_bPlayerJumping[3])
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 8; i++)
             {
                 g_bPlayerJumping[i] = false;
 
@@ -225,28 +227,36 @@ public class ControllerHandler : MonoBehaviour
 
             if (Input.GetAxis("LeftJoystickY_P") > 0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
             {
-                if (g_bPlayerJumping[0] == true)
+                if (g_bPlayerJumping[0] && !g_bPlayerJumping[7])
                 {
                     g_bPlayerJumping[2] = true; // nollie
                     g_bPlayerJumping[5] = true;
+                    print("posy jump");
                 }
                 else
                 {
+                    g_bPlayerJumping[7] = true;
                     g_bPlayerJumping[0] = true;
+                    print("posy attempt jump");
+                    Invoke("RefreshShit", 1.0f);
                 }
                 // Invoke("RefreshShit", 0.1f);
             }
 
             else if (Input.GetAxis("LeftJoystickY_P") < -0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
             {
-                if (g_bPlayerJumping[0] == true)
+                if (g_bPlayerJumping[0] == true && !g_bPlayerJumping[6])
                 {
                     g_bPlayerJumping[1] = true; // ollie
                     g_bPlayerJumping[5] = true;
+                    print("negy jump");
                 }
                 else
                 {
                     g_bPlayerJumping[0] = true;
+                    g_bPlayerJumping[6] = true;
+                    print("negy attempt jump");
+                    Invoke("RefreshShit", 1.0f);
                 }
                 //Invoke("RefreshShit", 0.1f);
             }
@@ -288,8 +298,7 @@ public class ControllerHandler : MonoBehaviour
 
             if (characterController.isGrounded == true && g_bPlayerJumping[3])
             {
-                print("testerrrrt");
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     if (i != 4)
                     {
