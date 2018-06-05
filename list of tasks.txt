@@ -15,7 +15,6 @@ interface- controls/ information
 PROGRAMMING
 
 end screen - show stats - points - how many objects hit - return to main menu/restart
-options screen + working settings
 way to end game - timer
 
 fog //fine
@@ -43,7 +42,7 @@ change skybox
 
 mostly complete:
 main menu - 3D menu scene - options button - help buttons
-
+options screen + working settings
 
 
 

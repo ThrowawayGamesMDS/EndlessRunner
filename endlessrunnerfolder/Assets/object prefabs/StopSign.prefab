@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65852029069475854}
   - component: {fileID: 54457517203454790}
   - component: {fileID: 114176181771771604}
+  - component: {fileID: 114719610052006390}
   m_Layer: 0
   m_Name: StopSign
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: d71d12855f3443f48b8e19fc8b460603, type: 2}
   m_StaticBatchInfo:
@@ -125,3 +127,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementspeed: 3
   rb: {fileID: 54457517203454790}
+--- !u!114 &114719610052006390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135772160975934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6e4758f8964cd469e8d5f1ae2e4f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWorthPoints: 0
+  worth: 300

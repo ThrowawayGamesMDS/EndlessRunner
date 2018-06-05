@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class scoring : MonoBehaviour {
-	public static int score;
+    public GameObject popup;
 	public bool lockout;
-	// Use this for initialization
-	void Start () {
-		score = 0;
-	}
+    private string lastObject;
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "building")
-		{
-			if (lockout == false) {
-				if (other.gameObject.name == "Body") {
-					score -= 5;
-				}
-				else
-				{
-					score += 2;
-				}
-
-				Debug.Log (score);
-				lockout = true;
-				StartCoroutine (lockoutf ());
-			}
-
-
-		}
+        if(other.gameObject.GetComponent<PointManager>())
+        {
+            if(other.gameObject.GetComponent<PointManager>().isWorthPoints == true)
+            {
+                statistics.g_globalPoints += other.gameObject.GetComponent<PointManager>().worth;
+                other.gameObject.GetComponent<PointManager>().isWorthPoints = false;
+                popup.SetActive(true);
+            }
+            
+        }
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            popup.SetActive(true);
+        }
+    }
+
 	IEnumerator lockoutf()
 	{
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (0.5f);
 		lockout = false;
 	}
 }

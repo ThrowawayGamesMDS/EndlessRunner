@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65134653216203694}
   - component: {fileID: 54586398285433662}
   - component: {fileID: 114876022877068388}
+  - component: {fileID: 114506904000938242}
   m_Layer: 0
   m_Name: Cone
   m_TagString: building
@@ -57,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 80659080855344a40ad1a4412fddc6db, type: 2}
   m_StaticBatchInfo:
@@ -112,6 +114,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.154914, y: 12.90374, z: 9.154914}
   m_Center: {x: 0, y: 6.45187, z: 0}
+--- !u!114 &114506904000938242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818784718029812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6e4758f8964cd469e8d5f1ae2e4f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWorthPoints: 0
+  worth: 200
 --- !u!114 &114876022877068388
 MonoBehaviour:
   m_ObjectHideFlags: 1

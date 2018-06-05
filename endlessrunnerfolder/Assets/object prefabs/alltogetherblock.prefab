@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 65403069108936504}
   - component: {fileID: 114786052530142538}
   - component: {fileID: 114662693444459350}
+  - component: {fileID: 114168209671819548}
   m_Layer: 0
   m_Name: alltogetherblock
   m_TagString: building
@@ -118,6 +119,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: cb459f18b3017074f84b421351b508d7, type: 2}
   m_StaticBatchInfo:
@@ -152,6 +154,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 469a1e4c78fb4314e9ee7d4e90b207d4, type: 2}
   m_StaticBatchInfo:
@@ -214,6 +217,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.583916, y: 4.7014046, z: 4.2707214}
   m_Center: {x: -0.012353897, y: 2.3348522, z: 0.0016479492}
+--- !u!114 &114168209671819548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1467671553718134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6e4758f8964cd469e8d5f1ae2e4f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWorthPoints: 0
+  worth: 500
 --- !u!114 &114662693444459350
 MonoBehaviour:
   m_ObjectHideFlags: 1
