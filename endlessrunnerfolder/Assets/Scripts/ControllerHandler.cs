@@ -169,7 +169,7 @@ public class ControllerHandler : MonoBehaviour
             if (Input.GetAxis("LeftJoystickX_P") < 0.19)
             {
                 print("EZY TRYNA TRICK1");
-                if (Input.GetAxis("LeftJoystickY_P") < 0.19)
+                if (Input.GetAxis("LeftJoystickX_P") < 0.19)
                 {
                     //trey flip
                     // var animator = this.GetComponent<Animator>();
@@ -186,7 +186,7 @@ public class ControllerHandler : MonoBehaviour
             else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
             {
                 print("EZY TRYNA TRICK2");
-                if (Input.GetAxis("LeftJoystickY_P") > 0.19)
+                if (Input.GetAxis("LeftJoystickX_P") > 0.19)
                 {
                     //inverse trey flip
                     //anim.Play("trey_flip");
