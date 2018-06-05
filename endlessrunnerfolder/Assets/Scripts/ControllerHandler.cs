@@ -41,6 +41,8 @@ public class ControllerHandler : MonoBehaviour
 
     string[] g_sarrControllerID;
 
+    public GameObject[] m_goWheels;
+
     Animator anim;
 
 
@@ -95,6 +97,15 @@ public class ControllerHandler : MonoBehaviour
     {
         characterController.Move(_newPos * Time.deltaTime);
         return;
+    }
+
+    void RotateWheels() // COULD USE THE LAYER SYSTEM WITHIN THE ANIMATOR TO DO THIS BUT CEEEEEEEEEEEEEBS SEEMING THIS IS A LOCALLY PLAYED GAME WITH ONLY ONE PLAYER!!!!
+    {
+        for (int i = 0; i < 4; i ++)
+        {
+            var vec3 = new Vector3(20, 0, 0);
+            m_goWheels[i].transform.Rotate(vec3);
+        }
     }
 
     void Update()
@@ -169,14 +180,14 @@ public class ControllerHandler : MonoBehaviour
             if (Input.GetAxis("LeftJoystickX_P") < - 0.19)
             {
                 print("EZY TRYNA TRICK1");
-                if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") > -0.65))
+                if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") > 0.65))
                 {
                     anim.SetTrigger("isFlipping");
                     print("PLAYER IS TREY FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
 
                     g_bPlayerJumping[4] = true;
                 }
-                else if (Input.GetAxis("LeftJoystickX_P") < -0.45)
+                else if (Input.GetAxis("LeftJoystickX_P") < -0.45 && Input.GetAxis("LeftJoystickY_P") > 0.4)
                 { 
                     anim.SetTrigger("kickFlipping");
                     print("PLAYER IS KICK FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
@@ -186,13 +197,13 @@ public class ControllerHandler : MonoBehaviour
             else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
             {
                 print("EZY TRYNA TRICK2");
-                if (Input.GetAxis("LeftJoystickX_P") > 0.65 && Input.GetAxis("LeftJoystickY_P") > 0.65)
+                if (Input.GetAxis("LeftJoystickX_P") > 0.65 && Input.GetAxis("LeftJoystickY_P") < -0.65)
                 {
                     anim.SetTrigger("isFlipping");
                     print("HERE2");
                     g_bPlayerJumping[4] = true;
                 }
-                else if (Input.GetAxis("LeftJoystickX_P") > 0.45)
+                else if (Input.GetAxis("LeftJoystickX_P") > 0.45 && Input.GetAxis("LeftJoystickY_P") > 0.4)
                 {
                     anim.SetTrigger("kickFlipping");
                     g_bPlayerJumping[4] = true;
@@ -209,52 +220,7 @@ public class ControllerHandler : MonoBehaviour
             }
         }
 
-        /*
-        switch (menucontroller.IsPlayingHard() && g_bPlayerJumping[3] && g_bPlayerJumping[2] || g_bPlayerJumping[1]) // could set to a variable but cbf wasting mem
-        {
-            case true:
-                {
-                    print("WEGOTHERE1");
-                    if (Input.GetAxis("LeftJoystickX_P") < 0.19 || Input.GetAxis("LeftJoystickX_P") > 0.19)
-                    {
-                        var vec3 = new Vector3(0, 0, (Input.GetAxis("LeftJoystickX_P")) * m_rotationSensitivity);
-                        this.transform.Rotate(vec3);
-                    }
-                    break;
-                }
-            case false:
-                {
-                    print("WEGOTHERE2");
-                    if (Input.GetAxis("LeftJoystickX_P") < 0.19)
-                    {
-                        if (Input.GetAxis("LeftJoystickY_P") < 0.19)
-                        {
-                            //trey flip
-                            anim.Play("trey_flip");
-                        }
-                        else
-                        {
-                           // anim.Play("horizontal_flip");
-                            //kick flip
-                        }
-                    }
-                    else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
-                    {
-                        if (Input.GetAxis("LeftJoystickY_P") > 0.19)
-                        {
-                            //inverse trey flip
-                            anim.Play("trey_flip");
-                        }
-                        else
-                        {
-                            //inverse kick flip
-                           // anim.Play("horizontal_flip");
-                        }
-                    }
-                    // run animations
-                    break;
-                }
-        }*/
+        RotateWheels();
 
         if (characterController.isGrounded == true && g_bPlayerJumping[3])
         {
