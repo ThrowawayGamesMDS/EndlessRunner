@@ -20,41 +20,33 @@ public class cameraChanges : MonoBehaviour {
 	//float min = -0.5f;
 	// Use this for initialization
 	void Start () {
-		
+		currnetx = transform.position.x;
+		currnety = transform.position.y;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Xdirection == true) {
-			//if (currnetx <= 0.5f) {
+			
 			shakeX = Random.Range (0.02f, 0.06f);//+
-			if (transform.position.y + shakeY <= 2.45f + shak) {
-				shakeY = Random.Range (0.00f, 0.03f);//+
-			} else {
-				if (transform.position.y + shakeY <= 2.75f + shak) {
-					shakeY = Random.Range (-0.03f, 0.00f);//+
-				} else {
-					shakeY = Random.Range (-0.03f, 0.03f);//+
-				}
 
-			}
-
-			if (transform.position.z + shakeZ <= 12.4f + shak) {
-				shakeY = Random.Range (0.00f, 0.03f);//+
-			} else {
-				if (transform.position.z + shakeZ >= 12.6f + shak) {
-					shakeY = Random.Range (-0.03f, 0.00f);//+
-				} else {
-					shakeY = Random.Range (-0.03f, 0.03f);//+
-				}
-			}
+			if (transform.position.y + shakeY >= .15f+currnety + shak) {
 				
-			if (shak!=0) {
-				shakeX= shakeX*shak;
+				shakeY = Random.Range (-0.03f, 0.00f);//+
+			} else {
+				if (transform.position.y + shakeY <= -.15f+currnety + shak) {
+					shakeY = Random.Range (0.00f, 0.03f);//+
+				} else {
+					shakeY = Random.Range (-0.03f, 0.03f);//+
+				}
+
 			}
 
-			if (transform.position.x + shakeX <= .3f+shak+CarPostion) {
-				currnetx = currnetx + shakeX;
+
+				
+
+			if (transform.position.x + shakeX <= .3f+shak+currnetx) {
+				
 				transform.position = new Vector3 (transform.position.x + shakeX,transform.position.y+shakeY,transform.position.z);
 			}
 			if (delay == 4) {
@@ -66,24 +58,25 @@ public class cameraChanges : MonoBehaviour {
 
 			//}
 		} else {
-			//if (currnetx >= -0.5f) {
-			if (transform.position.y + shakeY <= 2.45f + shak) {
-				shakeY = Random.Range(0.00f,0.03f);//+
+			shakeX = Random.Range (-0.06f, -.02f);//-
+
+			if (transform.position.y + shakeY >= .15f+currnety + shak) {
+				shakeY = Random.Range (-0.03f, 0.00f);//+
 			}else{
-				if (transform.position.y + shakeY >= 2.75f + shak) {
-					shakeY = Random.Range (-0.03f, 0.00f);//+
+				if (transform.position.y + shakeY <= -.15f+currnety+ shak) {
+					
+					shakeY = Random.Range(0.00f,0.03f);//+
 				} else {
 					shakeY = Random.Range (-0.03f, 0.03f);//+
 				}
 			}
-				shakeX = Random.Range (-0.06f, -.02f);//-
+				
 
-			if (shak!=0) {
-				shakeX= shakeX*shak;
-			}	
 
-			if (transform.position.x + shakeX >= -.3f-shak+CarPostion) {
-				currnetx = currnetx + shakeX;
+				
+
+			if (transform.position.x + shakeX >= -.3f-shak+currnetx) {
+				
 				transform.position = new Vector3 (transform.position.x + shakeX,transform.position.y+shakeY,transform.position.z);
 			}
 			if (delay == 4) {
@@ -139,3 +132,14 @@ public class cameraChanges : MonoBehaviour {
 		delayedcam--;
 	}
 }
+
+
+/*if (transform.position.z + shakeZ <= 12.4f + shak) {
+	shakeZ = Random.Range (0.00f, 0.03f);//+
+} else {
+	if (transform.position.z + shakeZ >= 12.6f + shak) {
+		shakeZ = Random.Range (-0.03f, 0.00f);//+
+	} else {
+		shakeZ = Random.Range (-0.03f, 0.03f);//+
+	}
+}*/
