@@ -14,8 +14,11 @@ public class movegorund : MonoBehaviour
 	{
 		//Vector3 pos = new Vector3(0,0,-movementspeed);
 		//transform.position += pos;
-		Vector3 temp = new Vector3(0,0,-movementspeed);
-		rb.velocity += temp;
+        if (!ControllerHandler.m_bIsPaused && ControllerHandler.m_bPlayerIsAlive)
+        {
+            Vector3 temp = new Vector3(0, 0, -movementspeed);
+            rb.velocity += temp;
+        }
 
 	}
 }

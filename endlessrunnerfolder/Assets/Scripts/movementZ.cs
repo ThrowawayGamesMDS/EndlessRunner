@@ -12,6 +12,9 @@ public class movementZ : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		tr.position = tr.position += new Vector3 (0, 0, -movementspeed);
+        if (!ControllerHandler.m_bIsPaused && ControllerHandler.m_bPlayerIsAlive)
+        {
+            tr.position = tr.position += new Vector3(0, 0, -movementspeed);
+        }
 	}
 }

@@ -25,6 +25,10 @@ public class ControllerHandler : MonoBehaviour
 
     private float gravity;
 
+    public static bool m_bIsPaused; // could do with a PlayerHandler class..
+
+    public static bool m_bPlayerIsAlive; // could do with a PlayerHandler class..
+
     private bool[] g_bPlayerJumping;
 
     private float m_rotationSensitivity;
@@ -72,7 +76,7 @@ public class ControllerHandler : MonoBehaviour
         {
             g_bPlayerJumping[i] = false;
         }
-        
+
         //First_Person_Camera.gameObject.SetActive(false);
         //Third_Person_Camera.gameObject.SetActive(true);
         g_bFirstPersonCamera = false;
@@ -101,10 +105,14 @@ public class ControllerHandler : MonoBehaviour
 
         m_iBoostersPerJump = 3;
 
+        m_bIsPaused = false;
+
+        m_bPlayerIsAlive = true;
+
 
         if (menucontroller.IsPlayingHard() == false)
         {
-           anim = GetComponent<Animator>();
+            anim = GetComponent<Animator>();
         }
 
     }
@@ -117,7 +125,7 @@ public class ControllerHandler : MonoBehaviour
 
     void RotateWheels() // COULD USE THE LAYER SYSTEM WITHIN THE ANIMATOR TO DO THIS BUT CEEEEEEEEEEEEEBS SEEMING THIS IS A LOCALLY PLAYED GAME WITH ONLY ONE PLAYER!!!!
     {
-        for (int i = 0; i < 4; i ++)
+        for (int i = 0; i < 4; i++)
         {
             var vec3 = new Vector3(20, 0, 0);
             m_goWheels[i].transform.Rotate(vec3);
@@ -191,114 +199,117 @@ public class ControllerHandler : MonoBehaviour
     void Update()
 
     {
-        /***
-         * 
-         * Handle side-to-side movement
-         * 
-         ***/
-        if (!g_bPlayerJumping[3] && (Input.GetAxis("RightJoystickX_P") > 0.19 || Input.GetAxis("RightJoystickX_P") < 0.19)) // stops the player's x movement whilst in the air.
+        if (!m_bIsPaused)
         {
-            g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * g_fMovementSpeed;
-            PushPlayerMovement(g_vec3MovementVector);
-        }
-        else
-        {
-            g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * (g_fMovementSpeed / 3);
-            PushPlayerMovement(g_vec3MovementVector);
-        }
-
-        /***
-         * 
-         * Handle player jumping
-         * 
-         ***/
-
-        if (Input.GetAxis("LeftJoystickY_P") > 0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
-        {
-           if (g_bPlayerJumping[0] == true)
+            /***
+        * 
+        * Handle side-to-side movement
+        * 
+        ***/
+            if (!g_bPlayerJumping[3] && (Input.GetAxis("RightJoystickX_P") > 0.19 || Input.GetAxis("RightJoystickX_P") < 0.19)) // stops the player's x movement whilst in the air.
             {
-                g_bPlayerJumping[2] = true; // nollie
-                g_bPlayerJumping[5] = true; 
-            }
-           else
-            {
-                g_bPlayerJumping[0] = true;
-            }
-           // Invoke("RefreshShit", 0.1f);
-        }
-
-        else if (Input.GetAxis("LeftJoystickY_P") < -0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
-        {
-            if (g_bPlayerJumping[0] == true)
-            {
-                g_bPlayerJumping[1] = true; // ollie
-                g_bPlayerJumping[5] = true;
+                g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * g_fMovementSpeed;
+                PushPlayerMovement(g_vec3MovementVector);
             }
             else
             {
-                g_bPlayerJumping[0] = true;
+                g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * (g_fMovementSpeed / 3);
+                PushPlayerMovement(g_vec3MovementVector);
             }
-            //Invoke("RefreshShit", 0.1f);
-        }
 
-        if (g_bPlayerJumping[5])
-        {
-            g_bPlayerJumping[3] = true;
-            g_bPlayerJumping[5] = false;
-            g_vec3MovementVector.y = g_fJumpPower;
-            PushPlayerMovement(g_vec3MovementVector);
-            characterController.Move(g_vec3MovementVector * Time.deltaTime);
-        }
+            /***
+             * 
+             * Handle player jumping
+             * 
+             ***/
 
-        /***
-         * 
-         * Handle tricks whilst player is jumping by difficulty
-         * 
-         ***/
-
-        if (menucontroller.IsPlayingHard() == false && g_bPlayerJumping[3] && !g_bPlayerJumping[4]) // PLAYING EZY
-        {
-            HandleTricks();
-        }
-        else // HARD AS FUCK
-        {
-            if (Input.GetAxis("LeftJoystickX_P") < 0.19 || Input.GetAxis("LeftJoystickX_P") > 0.19)
+            if (Input.GetAxis("LeftJoystickY_P") > 0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
             {
-                var vec3 = new Vector3(0, 0, (Input.GetAxis("LeftJoystickX_P")) * m_rotationSensitivity);
-                this.transform.Rotate(vec3);
-            }
-        }
-
-        /***
-         * 
-         * Handle other shit - like rotation of wheels and reseting bools when player is grounded..
-         * 
-         ***/
-        RotateWheels();
-
-        if (characterController.isGrounded == true && g_bPlayerJumping[3])
-        {
-            print("testerrrrt");
-            for (int i = 0; i < 6; i++)
-            {
-                if (i != 4)
+                if (g_bPlayerJumping[0] == true)
                 {
-                    g_bPlayerJumping[i] = false;
+                    g_bPlayerJumping[2] = true; // nollie
+                    g_bPlayerJumping[5] = true;
                 }
                 else
                 {
-                    if (g_bPlayerJumping[i] == true)
-                    {
-                        this.gameObject.SetActive(false);
-                        print("CRASH");
-                    }
+                    g_bPlayerJumping[0] = true;
                 }
-
+                // Invoke("RefreshShit", 0.1f);
             }
-            m_iBoostersPerJump = 3; // + some integer value (like donuts collected)
-        }
 
-        if (Input.GetButtonUp("RightJoystickC_P"))
+            else if (Input.GetAxis("LeftJoystickY_P") < -0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
+            {
+                if (g_bPlayerJumping[0] == true)
+                {
+                    g_bPlayerJumping[1] = true; // ollie
+                    g_bPlayerJumping[5] = true;
+                }
+                else
+                {
+                    g_bPlayerJumping[0] = true;
+                }
+                //Invoke("RefreshShit", 0.1f);
+            }
+
+            if (g_bPlayerJumping[5])
+            {
+                g_bPlayerJumping[3] = true;
+                g_bPlayerJumping[5] = false;
+                g_vec3MovementVector.y = g_fJumpPower;
+                PushPlayerMovement(g_vec3MovementVector);
+                characterController.Move(g_vec3MovementVector * Time.deltaTime);
+            }
+
+            /***
+             * 
+             * Handle tricks whilst player is jumping by difficulty
+             * 
+             ***/
+
+            if (menucontroller.IsPlayingHard() == false && g_bPlayerJumping[3] && !g_bPlayerJumping[4]) // PLAYING EZY
+            {
+                HandleTricks();
+            }
+            else // HARD AS FUCK
+            {
+                if (Input.GetAxis("LeftJoystickX_P") < 0.19 || Input.GetAxis("LeftJoystickX_P") > 0.19)
+                {
+                    var vec3 = new Vector3(0, 0, (Input.GetAxis("LeftJoystickX_P")) * m_rotationSensitivity);
+                    this.transform.Rotate(vec3);
+                }
+            }
+
+            /***
+             * 
+             * Handle other shit - like rotation of wheels and reseting bools when player is grounded..
+             * 
+             ***/
+            RotateWheels();
+
+            if (characterController.isGrounded == true && g_bPlayerJumping[3])
+            {
+                print("testerrrrt");
+                for (int i = 0; i < 6; i++)
+                {
+                    if (i != 4)
+                    {
+                        g_bPlayerJumping[i] = false;
+                    }
+                    else
+                    {
+                        if (g_bPlayerJumping[i] == true)
+                        {
+                            this.gameObject.SetActive(false);
+                            print("CRASH");
+                            m_bPlayerIsAlive = false;
+                        }
+                    }
+
+                }
+                m_iBoostersPerJump = 3; // + some integer value (like donuts collected)
+            }
+
+            if (Input.GetButtonUp("RightJoystickC_P"))
             {
                 if (g_bPlayerJumping[3] && m_iBoostersPerJump > 0)
                 {
@@ -309,8 +320,24 @@ public class ControllerHandler : MonoBehaviour
                     print("gap it");
                 }
             }
-
-        g_vec3MovementVector.y -= gravity * Time.deltaTime;
+            g_vec3MovementVector.y -= gravity * Time.deltaTime;
+        }
+        if (Input.GetButtonUp("XBOXStartButton"))
+        {
+            switch (m_bIsPaused)
+            {
+                case false:
+                    m_bIsPaused = true;
+                    break;
+                case true:
+                    m_bIsPaused = false;
+                    break;
+            }
+        }
+        if (Input.GetButtonUp("XBOXSelectButton"))
+        {
+            this.gameObject.SetActive(true);
+        }
     }
-  
+
 }

@@ -30,7 +30,10 @@ public class objectspawner : MonoBehaviour {
 	}
 	void Update()
 	{
-		spawn ();
+        if (!ControllerHandler.m_bIsPaused && ControllerHandler.m_bPlayerIsAlive)
+        {
+            spawn();
+        }
 	}
 
 	void spawn()
