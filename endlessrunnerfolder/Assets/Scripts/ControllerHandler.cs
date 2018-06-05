@@ -25,6 +25,8 @@ public class ControllerHandler : MonoBehaviour
 
     private bool[] g_bPlayerJumping;
 
+    private float m_rotationSensitivity;
+
     public bool g_bFirstPersonCamera;
 
     public Camera First_Person_Camera;
@@ -39,15 +41,33 @@ public class ControllerHandler : MonoBehaviour
 
     string[] g_sarrControllerID;
 
+    Animator anim;
+
+
+    /***
+     * 
+     * 
+     * 
+     * g_bPlayerJumping[0] = INITIALIZE JUMP
+     * g_bPlayerJumping[1] = OLLIE ATTEMPT
+     * g_bPlayerJumping[2] = NOLLIE ATTEMPT
+     * g_bPlayerJumping[3] = JUMPING G
+     * g_bPlayerJumping[4] = TRICKING (IN EZY MODE)
+     * 
+     * 
+     * 
+     ***/
+
     void Start()
 
     {
         // Jumping bool setup
-        g_bPlayerJumping = new bool[4];
-        for (int i = 0; i < 4; i++)
+        g_bPlayerJumping = new bool[5];
+        for (int i = 0; i < 5; i++)
         {
             g_bPlayerJumping[i] = false;
         }
+        
         //First_Person_Camera.gameObject.SetActive(false);
         //Third_Person_Camera.gameObject.SetActive(true);
         g_bFirstPersonCamera = false;
@@ -62,6 +82,13 @@ public class ControllerHandler : MonoBehaviour
             print(g_sarrControllerID[0]);
         }
 
+        m_rotationSensitivity = 30.5f;
+
+        if (menucontroller.IsPlayingHard() == false)
+        {
+           anim = GetComponent<Animator>();
+        }
+
     }
 
     void PushPlayerMovement(Vector3 _newPos)
@@ -73,26 +100,8 @@ public class ControllerHandler : MonoBehaviour
     void Update()
 
     {
-        string joystickString = joystickNumber.ToString();
 
-        /*if (Input.GetButtonDown("RightJoystickC_P"))
-        {
-            switch (g_bFirstPersonCamera)
-            {
-                case true:
-                    First_Person_Camera.gameObject.SetActive(false);
-                    Third_Person_Camera.gameObject.SetActive(true);
-                    g_bFirstPersonCamera = false;
-                    break;
-                case false: // switch to first person
-                    First_Person_Camera.gameObject.SetActive(true);
-                    Third_Person_Camera.gameObject.SetActive(false);
-                    g_bFirstPersonCamera = true;
-                    break;
-            }
-        }*/
-
-        if (!g_bPlayerJumping[3] && (Input.GetAxis("RightJoystickY_P") > 0.19 || Input.GetAxis("RightJoystickY_P") < 0.19)) // stops the player's x movement whilst in the air.
+        if (!g_bPlayerJumping[3] && (Input.GetAxis("RightJoystickX_P") > 0.19 || Input.GetAxis("RightJoystickX_P") < 0.19)) // stops the player's x movement whilst in the air.
         {
             g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * g_fMovementSpeed;
             PushPlayerMovement(g_vec3MovementVector);
@@ -103,15 +112,15 @@ public class ControllerHandler : MonoBehaviour
             PushPlayerMovement(g_vec3MovementVector);
         }
 
-        if (Input.GetAxis("RightJoystickY_P") > 0.19 || Input.GetAxis("RightJoystickY_P") < 0.19)
+        if (Input.GetAxis("LeftJoystickY_P") > 0.19 || Input.GetAxis("LeftJoystickY_P") < 0.19) // player jumping
         {
-            if (Input.GetAxis("RightJoystickY_P") > 0.7 && !g_bPlayerJumping[3]) // NOLLIE POSITIVE MOVEMENT
+            if (Input.GetAxis("LeftJoystickY_P") > 0.7 && !g_bPlayerJumping[3]) 
             {
                 switch (g_bPlayerJumping[0])
                 {
                     case true:
                         {
-                            if (g_bPlayerJumping[2])
+                            if (g_bPlayerJumping[2]) // Nollie
                             {
                                 g_vec3MovementVector.y = g_fJumpPower;
                                 g_bPlayerJumping[3] = true;
@@ -128,13 +137,13 @@ public class ControllerHandler : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxis("RightJoystickY_P") < 0.7 && !g_bPlayerJumping[3]) // NOLLIE POSITIVE MOVEMENT
+            if (Input.GetAxis("LeftJoystickY_P") < 0.7 && !g_bPlayerJumping[3]) 
             {
                 switch (g_bPlayerJumping[0])
                 {
                     case true:
                         {
-                            if (g_bPlayerJumping[1])
+                            if (g_bPlayerJumping[1]) // Ollie
                             {
                                 g_vec3MovementVector.y = g_fJumpPower;
                                 g_bPlayerJumping[3] = true;
@@ -154,9 +163,105 @@ public class ControllerHandler : MonoBehaviour
             PushPlayerMovement(g_vec3MovementVector);
         }
 
+        if (menucontroller.IsPlayingHard() == false && g_bPlayerJumping[3] && !g_bPlayerJumping[4]) // PLAYING EZY
+        {
+        
+            if (Input.GetAxis("LeftJoystickX_P") < 0.19)
+            {
+                print("EZY TRYNA TRICK1");
+                if (Input.GetAxis("LeftJoystickY_P") < 0.19)
+                {
+                    //trey flip
+                    // var animator = this.GetComponent<Animator>();
+                    anim.SetTrigger("isFlipping");
+                    print("HERE1");
+                }
+                else
+                {
+                    // anim.Play("horizontal_flip");
+                    //kick flip
+                }
+                g_bPlayerJumping[4] = true;
+            }
+            else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
+            {
+                print("EZY TRYNA TRICK2");
+                if (Input.GetAxis("LeftJoystickY_P") > 0.19)
+                {
+                    //inverse trey flip
+                    //anim.Play("trey_flip");
+                    //var animator = this.GetComponent<Animator>();
+                    anim.SetTrigger("isFlipping");
+                    print("HERE2");
+                }
+                else
+                {
+                    //inverse kick flip
+                    // anim.Play("horizontal_flip");
+                }
+                g_bPlayerJumping[4] = true;
+            }
+            // run animations
+        }
+        else // HARD AS FUCK
+        {
+            if (Input.GetAxis("LeftJoystickX_P") < 0.19 || Input.GetAxis("LeftJoystickX_P") > 0.19)
+            {
+                var vec3 = new Vector3(0, 0, (Input.GetAxis("LeftJoystickX_P")) * m_rotationSensitivity);
+                this.transform.Rotate(vec3);
+            }
+        }
+
+        /*
+        switch (menucontroller.IsPlayingHard() && g_bPlayerJumping[3] && g_bPlayerJumping[2] || g_bPlayerJumping[1]) // could set to a variable but cbf wasting mem
+        {
+            case true:
+                {
+                    print("WEGOTHERE1");
+                    if (Input.GetAxis("LeftJoystickX_P") < 0.19 || Input.GetAxis("LeftJoystickX_P") > 0.19)
+                    {
+                        var vec3 = new Vector3(0, 0, (Input.GetAxis("LeftJoystickX_P")) * m_rotationSensitivity);
+                        this.transform.Rotate(vec3);
+                    }
+                    break;
+                }
+            case false:
+                {
+                    print("WEGOTHERE2");
+                    if (Input.GetAxis("LeftJoystickX_P") < 0.19)
+                    {
+                        if (Input.GetAxis("LeftJoystickY_P") < 0.19)
+                        {
+                            //trey flip
+                            anim.Play("trey_flip");
+                        }
+                        else
+                        {
+                           // anim.Play("horizontal_flip");
+                            //kick flip
+                        }
+                    }
+                    else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
+                    {
+                        if (Input.GetAxis("LeftJoystickY_P") > 0.19)
+                        {
+                            //inverse trey flip
+                            anim.Play("trey_flip");
+                        }
+                        else
+                        {
+                            //inverse kick flip
+                           // anim.Play("horizontal_flip");
+                        }
+                    }
+                    // run animations
+                    break;
+                }
+        }*/
+
         if (characterController.isGrounded == true && g_bPlayerJumping[3])
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 g_bPlayerJumping[i] = false;
 

@@ -15,6 +15,8 @@ public class menucontroller : MonoBehaviour {
     public GameObject perspective;
     public GameObject options;
     public int whatMenu;
+    enum mode { EASY, HARD};
+    static mode g_mPlayerDifficulty;
     int mainmenuint = 1;
     int perspectivemenu = 2;
     int optionsmenu = 3;
@@ -22,7 +24,9 @@ public class menucontroller : MonoBehaviour {
 	void Start () {
         selector = 1;
         whatMenu = mainmenuint;
-	}
+        g_mPlayerDifficulty = mode.EASY;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -161,5 +165,31 @@ public class menucontroller : MonoBehaviour {
                     break;
             }
         }
+    }
+    
+    public static bool IsPlayingHard()
+    {
+        if (g_mPlayerDifficulty == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+        /*
+        switch(g_mPlayerDifficulty)
+        {
+            case mode.HARD:
+                {
+                    return true;
+                }
+            case mode.EASY:
+                {
+                    return true;
+                }
+            default: break;
+        }
+        return true;*/
     }
 }
