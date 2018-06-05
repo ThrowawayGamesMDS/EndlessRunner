@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 65129299576101270}
   - component: {fileID: 114991522243848018}
   - component: {fileID: 114024764942317152}
+  - component: {fileID: 114305574709687804}
   m_Layer: 0
   m_Name: Donut
   m_TagString: Untagged
@@ -126,6 +127,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementspeed: 3
   rb: {fileID: 54273753153753990}
+--- !u!114 &114305574709687804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392363444683380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6e4758f8964cd469e8d5f1ae2e4f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWorthPoints: 0
+  objName: donut
+  worth: 1250
 --- !u!114 &114991522243848018
 MonoBehaviour:
   m_ObjectHideFlags: 1

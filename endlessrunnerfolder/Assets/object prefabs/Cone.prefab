@@ -58,7 +58,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 80659080855344a40ad1a4412fddc6db, type: 2}
   m_StaticBatchInfo:
@@ -126,7 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorthPoints: 0
-  worth: 200
+  objName: cone
+  worth: 230
 --- !u!114 &114876022877068388
 MonoBehaviour:
   m_ObjectHideFlags: 1

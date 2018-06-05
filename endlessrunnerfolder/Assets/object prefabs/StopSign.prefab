@@ -58,7 +58,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: d71d12855f3443f48b8e19fc8b460603, type: 2}
   m_StaticBatchInfo:
@@ -139,4 +138,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWorthPoints: 0
-  worth: 300
+  objName: stopsign
+  worth: 360
