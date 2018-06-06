@@ -14,7 +14,7 @@ public class timer : MonoBehaviour
     }
     private void Update()
     {
-        if (!ControllerHandler.m_bIsPaused)
+        if (!ControllerHandler.m_bIsPaused && ControllerHandler.m_bPlayerIsAlive)
         {
             gameTimer -= Time.deltaTime;
             timerTxt.text = Mathf.RoundToInt(gameTimer).ToString();

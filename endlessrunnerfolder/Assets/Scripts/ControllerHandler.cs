@@ -5,8 +5,8 @@ using System.Collections;
 public class ControllerHandler : MonoBehaviour
 
 {
-
     private Vector3 g_vec3MovementVector;
+
     private Vector3 g_vec3DirectionalVector;
 
     private CharacterController characterController;
@@ -81,9 +81,26 @@ public class ControllerHandler : MonoBehaviour
      * 
      ***/
 
-    void Start()
-
+    void DoMyWindow(int windowID)
     {
+       
+    }
+
+    void OnGUI()
+    {
+        // Register the window. Notice the 3rd parameter
+        if (m_bIsPaused && m_bPlayerIsAlive)
+        {
+            Rect windowRect = new Rect(225, 0, 250, 750);
+            windowRect = GUI.Window(0, windowRect, DoMyWindow, "GAME PAUSED - OPTIONS MENU");
+        }
+    }
+
+    void Start()
+    {
+
+        print("WIDTH: " + Screen.width + ", HEIGHT: " + Screen.height);
+
         // Jumping bool setup
         g_bPlayerJumping = new bool[8];
         for (int i = 0; i < 8; i++)
