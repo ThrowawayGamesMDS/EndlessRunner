@@ -25,6 +25,8 @@ public class ControllerHandler : MonoBehaviour
 
     private float gravity;
 
+    private bool m_bScreenShakeActive;
+
     public static bool m_bIsPaused; // could do with a PlayerHandler class..
 
     public static bool m_bPlayerIsAlive; // could do with a PlayerHandler class..
@@ -34,6 +36,8 @@ public class ControllerHandler : MonoBehaviour
     private float m_rotationSensitivity;
 
     public bool g_bFirstPersonCamera;
+
+    public static bool m_bSetScreenShake;
 
     public Camera First_Person_Camera;
 
@@ -111,6 +115,11 @@ public class ControllerHandler : MonoBehaviour
 
         m_bPlayerIsAlive = true;
 
+        m_bSetScreenShake = false;
+
+        m_bScreenShakeActive = false;
+
+        Third_Person_Camera.GetComponent<cameraChanges>().enabled = false;
 
         if (menucontroller.IsPlayingHard() == false)
         {
@@ -181,6 +190,17 @@ public class ControllerHandler : MonoBehaviour
         }
     }
 
+    void TurnOffScreenShake()
+    {
+        Third_Person_Camera.GetComponent<cameraChanges>().enabled = false;
+
+        if (m_bSetScreenShake)
+        {
+            m_bSetScreenShake = false;
+            m_bScreenShakeActive = false;
+        }
+    }
+
     void RefreshShit()
     {
         if (!g_bPlayerJumping[3])
@@ -203,6 +223,14 @@ public class ControllerHandler : MonoBehaviour
     {
         if (!m_bIsPaused)
         {
+
+            if (m_bSetScreenShake && !m_bScreenShakeActive)
+            {
+                Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
+                m_bScreenShakeActive = true;
+                Invoke("TurnOffScreenShake", 0.4f);
+            }
+
             /***
         * 
         * Handle side-to-side movement
@@ -298,6 +326,8 @@ public class ControllerHandler : MonoBehaviour
 
             if (characterController.isGrounded == true && g_bPlayerJumping[3])
             {
+                Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
+                Invoke("TurnOffScreenShake", 0.5f);
                 for (int i = 0; i < 8; i++)
                 {
                     if (i != 4)
@@ -347,6 +377,8 @@ public class ControllerHandler : MonoBehaviour
         {
             this.gameObject.SetActive(true);
         }
+
+   
     }
 
 }

@@ -19,6 +19,7 @@ public class scoring : MonoBehaviour {
             {
                 statistics.g_globalPoints += other.gameObject.GetComponent<PointManager>().worth;
                 other.gameObject.GetComponent<PointManager>().isWorthPoints = false;
+                ControllerHandler.m_bSetScreenShake = true;
                 switch (other.gameObject.GetComponent<PointManager>().objName)
                 {
                     case "cone":
