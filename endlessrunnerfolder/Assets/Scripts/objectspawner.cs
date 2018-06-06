@@ -13,6 +13,7 @@ public class objectspawner : MonoBehaviour {
 	public GameObject obj7;
 	public GameObject obj8;
 	public GameObject obj9;
+    public GameObject obj10;
     GameObject rando;
 	void Start()
 	{
@@ -25,9 +26,10 @@ public class objectspawner : MonoBehaviour {
 		objs.Add (obj7);
 		objs.Add (obj8);
 		objs.Add (obj9);
+        objs.Add (obj10);
 
-		
-	}
+
+    }
 	void Update()
 	{
         if (!ControllerHandler.m_bIsPaused && ControllerHandler.m_bPlayerIsAlive)

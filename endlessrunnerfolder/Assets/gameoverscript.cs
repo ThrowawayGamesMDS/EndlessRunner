@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class animatePopup : MonoBehaviour {
-    public float movespeed;
-    public CanvasGroup uiElement;
-    
-	// Use this for initialization
-    void Start()
+using UnityEngine.SceneManagement;
+
+public class gameoverscript : MonoBehaviour {
+    public CanvasGroup cg;
+    public Text score;
+    void OnEnable()
     {
-        StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 0));
-        Invoke("destroyself", 1f);
+        StartCoroutine(FadeCanvasGroup(cg, cg.alpha, 1));
     }
-	
+
     void Update()
     {
-        transform.Translate(0,movespeed,0);
+        score.text = statistics.g_globalPoints.ToString();
+        if (timer.isGameOver && Input.GetButtonDown("XBOXStartButton"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerptime = 0.3f)
@@ -24,7 +27,7 @@ public class animatePopup : MonoBehaviour {
         float timeSinceStarted = Time.time - _timeStartedLerping;
         float percentageComplete = timeSinceStarted / lerptime;
 
-        while(true)
+        while (true)
         {
             timeSinceStarted = Time.time - _timeStartedLerping;
             percentageComplete = timeSinceStarted / lerptime;
@@ -39,11 +42,5 @@ public class animatePopup : MonoBehaviour {
     }
 
 
-
-
-	void destroyself()
-    {
-         
-        Destroy(gameObject);
-    }
+    
 }

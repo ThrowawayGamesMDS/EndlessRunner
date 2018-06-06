@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class statistics : MonoBehaviour {
+
     public static int g_globalPoints;
     public Text globalPointsText;
 	// Use this for initialization

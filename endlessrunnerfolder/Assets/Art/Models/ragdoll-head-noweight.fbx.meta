@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: 1395a7951571fe94a831803269f36f6e
+timeCreated: 1528243318
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Chest
+    100002: Head
+    100004: HeadBase
+    100006: Jaw
+    100008: L_Ankle
+    100010: L_Clavicle
+    100012: L_Elbow
+    100014: L_FootBall
+    100016: L_FootToe
+    100018: L_Index01
+    100020: L_Index02
+    100022: L_IndexKnuckle
+    100024: L_IndexTip
+    100026: L_Knee
+    100028: L_Middle01
+    100030: L_Middle02
+    100032: L_MiddleKnuckle
+    100034: L_MiddleTip
+    100036: L_Pinky01
+    100038: L_Pinky02
+    100040: L_PinkyKnuckle
+    100042: L_PinkyTip
+    100044: L_Ring01
+    100046: L_Ring02
+    100048: L_RingKnuckle
+    100050: L_RingTip
+    100052: L_Shoulder
+    100054: L_Thigh
+    100056: L_Thumb01
+    100058: L_Thumb02
+    100060: L_ThumbKnuckle
+    100062: L_ThumbTip
+    100064: L_Wrist
+    100066: LowerSpine
+    100068: NeckBase
+    100070: Pelvis
+    100072: polySurface7
+    100074: polySurface7_MeshPart0
+    100076: polySurface7_MeshPart1
+    100078: R_Ankle
+    100080: R_Clavicle
+    100082: R_Elbow
+    100084: R_FootBall
+    100086: R_FootToe
+    100088: R_Index01
+    100090: R_Index02
+    100092: R_IndexKnuckle
+    100094: R_IndexTip
+    100096: R_Knee
+    100098: R_Middle01
+    100100: R_Middle02
+    100102: R_MiddleKnuckle
+    100104: R_MiddleTip
+    100106: R_Pinky01
+    100108: R_Pinky02
+    100110: R_PinkyKnuckle
+    100112: R_PinkyTip
+    100114: R_Ring01
+    100116: R_Ring02
+    100118: R_RingKnuckle
+    100120: R_RingTip
+    100122: R_Shoulder
+    100124: R_Thigh
+    100126: R_Thumb01
+    100128: R_Thumb02
+    100130: R_ThumbKnuckle
+    100132: R_ThumbTip
+    100134: R_Wrist
+    100136: //RootNode
+    100138: RibCage
+    100140: Root
+    100142: UpperSpine
+    400000: Chest
+    400002: Head
+    400004: HeadBase
+    400006: Jaw
+    400008: L_Ankle
+    400010: L_Clavicle
+    400012: L_Elbow
+    400014: L_FootBall
+    400016: L_FootToe
+    400018: L_Index01
+    400020: L_Index02
+    400022: L_IndexKnuckle
+    400024: L_IndexTip
+    400026: L_Knee
+    400028: L_Middle01
+    400030: L_Middle02
+    400032: L_MiddleKnuckle
+    400034: L_MiddleTip
+    400036: L_Pinky01
+    400038: L_Pinky02
+    400040: L_PinkyKnuckle
+    400042: L_PinkyTip
+    400044: L_Ring01
+    400046: L_Ring02
+    400048: L_RingKnuckle
+    400050: L_RingTip
+    400052: L_Shoulder
+    400054: L_Thigh
+    400056: L_Thumb01
+    400058: L_Thumb02
+    400060: L_ThumbKnuckle
+    400062: L_ThumbTip
+    400064: L_Wrist
+    400066: LowerSpine
+    400068: NeckBase
+    400070: Pelvis
+    400072: polySurface7
+    400074: polySurface7_MeshPart0
+    400076: polySurface7_MeshPart1
+    400078: R_Ankle
+    400080: R_Clavicle
+    400082: R_Elbow
+    400084: R_FootBall
+    400086: R_FootToe
+    400088: R_Index01
+    400090: R_Index02
+    400092: R_IndexKnuckle
+    400094: R_IndexTip
+    400096: R_Knee
+    400098: R_Middle01
+    400100: R_Middle02
+    400102: R_MiddleKnuckle
+    400104: R_MiddleTip
+    400106: R_Pinky01
+    400108: R_Pinky02
+    400110: R_PinkyKnuckle
+    400112: R_PinkyTip
+    400114: R_Ring01
+    400116: R_Ring02
+    400118: R_RingKnuckle
+    400120: R_RingTip
+    400122: R_Shoulder
+    400124: R_Thigh
+    400126: R_Thumb01
+    400128: R_Thumb02
+    400130: R_ThumbKnuckle
+    400132: R_ThumbTip
+    400134: R_Wrist
+    400136: //RootNode
+    400138: RibCage
+    400140: Root
+    400142: UpperSpine
+    4300000: polySurface7_MeshPart0
+    4300002: polySurface7_MeshPart1
+    9500000: //RootNode
+    13700000: polySurface7_MeshPart0
+    13700002: polySurface7_MeshPart1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ragdoll_Head_Mat
+    second: {fileID: 2100000, guid: f3e43bf679e3e994aab8b73e08d77ef7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye1
+    second: {fileID: 2100000, guid: 693117d905fb1b64fb4c93620a429d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ragdoll_body_mat1
+    second: {fileID: 2100000, guid: 997c5bb4d5885fd469d39d8cc57d0c02, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

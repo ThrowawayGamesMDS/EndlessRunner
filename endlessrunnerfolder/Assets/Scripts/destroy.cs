@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class destroy : MonoBehaviour {
     public GameObject remains;
+    private bool isInstantiated;
+    void Start()
+    {
+        isInstantiated = false;
+    }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if(!isInstantiated)
         {
-            Instantiate(remains, transform.position, transform.rotation);
-            Destroy(gameObject);
+            if (other.gameObject.tag == "Player")
+            {
+                Instantiate(remains, transform.position, transform.rotation);
+                Destroy(gameObject);
+                isInstantiated = true;
+            }
         }
+        
     }
 }
