@@ -130,6 +130,8 @@ ModelImporter:
     100244: transform8
     100246: transform9
     100248: UpperSpine
+    100250: polySurface7_MeshPart0
+    100252: polySurface7_MeshPart1
     400000: Ancient_Char1
     400002: Ancient_Char11
     400004: Ancient_Char13
@@ -255,12 +257,18 @@ ModelImporter:
     400244: transform8
     400246: transform9
     400248: UpperSpine
+    400250: polySurface7_MeshPart0
+    400252: polySurface7_MeshPart1
     2100000: ragdoll_body_mat
     2100002: Ragdoll_Head_Mat
     2100004: eye
     4300000: polySurface7
+    4300002: polySurface7_MeshPart0
+    4300004: polySurface7_MeshPart1
     9500000: //RootNode
     13700000: polySurface7
+    13700002: polySurface7_MeshPart0
+    13700004: polySurface7_MeshPart1
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -304,8 +312,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
