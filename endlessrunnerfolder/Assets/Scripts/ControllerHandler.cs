@@ -59,6 +59,8 @@ public class ControllerHandler : MonoBehaviour
 
     [SerializeField] private AudioClip m_acCrashClip;
 
+    [SerializeField] private AudioClip m_acJumpClip;
+
     private AudioSource m_asPlayAudio;
 
 
@@ -144,6 +146,7 @@ public class ControllerHandler : MonoBehaviour
         }
         else if (_soundToPlay == "jump")
         {
+            m_asPlayAudio.clip = m_acJumpClip;
             //edit
         }
         else if (_soundToPlay == "crash")
@@ -325,6 +328,7 @@ public class ControllerHandler : MonoBehaviour
                 g_vec3MovementVector.y = g_fJumpPower;
                 PushPlayerMovement(g_vec3MovementVector);
                 characterController.Move(g_vec3MovementVector * Time.deltaTime);
+                PlaySound("jump");
             }
 
             /***

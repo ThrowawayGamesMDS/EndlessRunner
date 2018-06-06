@@ -14,12 +14,18 @@ public class timer : MonoBehaviour
     }
     private void Update()
     {
-        gameTimer -= Time.deltaTime;
-        timerTxt.text = Mathf.RoundToInt(gameTimer).ToString();
+        if (!ControllerHandler.m_bIsPaused)
+        {
+            gameTimer -= Time.deltaTime;
+            timerTxt.text = Mathf.RoundToInt(gameTimer).ToString();
+        }
 
-		if (gameTimer == 0) {
-			//SceneManager.LoadScene("enter level name here"); 
-		}
+		if (gameTimer <= 0)
+        {
+            ControllerHandler.m_bPlayerIsAlive = false;
+            ControllerHandler.m_bIsPaused = true;
+            //SceneManager.LoadScene("enter level name here"); 
+        }
 
     }
 

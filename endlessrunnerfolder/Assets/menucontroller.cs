@@ -14,6 +14,9 @@ public class menucontroller : MonoBehaviour {
     public GameObject mainmenu;
     public GameObject perspective;
     public GameObject options;
+
+    private bool m_bAllowControllerMovement;
+
     public int whatMenu;
     enum mode { EASY, HARD};
     static mode g_mPlayerDifficulty;
@@ -25,13 +28,19 @@ public class menucontroller : MonoBehaviour {
         selector = 1;
         whatMenu = mainmenuint;
         g_mPlayerDifficulty = mode.EASY;
+        m_bAllowControllerMovement = true;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+
+    void RefreshControllerSelection()
+    {
+        m_bAllowControllerMovement = true;
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonUp("XBOXAButton"))
         {
             if (whatMenu == mainmenuint)
             {
@@ -73,22 +82,30 @@ public class menucontroller : MonoBehaviour {
         }
         
 
+        if (Input.GetAxis("LeftJoystickY_P") > -0.19f && Input.GetAxis("LeftJoystickY_P") < 0.19f)
+        {
+            m_bAllowControllerMovement = true;
+        }
 
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+
+        if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("LeftJoystickY_P") < -0.9 && m_bAllowControllerMovement)
         {
             selector -= 1;
+            m_bAllowControllerMovement = false;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("LeftJoystickY_P") > 0.9 && m_bAllowControllerMovement)
         {
             selector += 1;
+            m_bAllowControllerMovement = false;
         }
         if(whatMenu == perspectivemenu)
         {
-            if(Input.GetKeyDown(KeyCode.Backspace))
+            if(Input.GetKeyDown(KeyCode.Backspace) || Input.GetButtonUp("XBOXBButton"))
             {
                 mainmenu.SetActive(true);
                 perspective.SetActive(false);
                 whatMenu = mainmenuint;
+
             }
         }
         else if (whatMenu == optionsmenu)
