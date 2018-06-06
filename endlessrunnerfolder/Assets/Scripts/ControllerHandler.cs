@@ -55,6 +55,12 @@ public class ControllerHandler : MonoBehaviour
 
     Animator anim;
 
+    [SerializeField] private AudioClip m_acBoosterClip;
+
+    [SerializeField] private AudioClip m_acCrashClip;
+
+    private AudioSource m_asPlayAudio;
+
 
     /***
      * 
@@ -121,11 +127,34 @@ public class ControllerHandler : MonoBehaviour
 
         Third_Person_Camera.GetComponent<cameraChanges>().enabled = false;
 
+        m_asPlayAudio = GetComponent<AudioSource>();
+
         if (menucontroller.IsPlayingHard() == false)
         {
             anim = GetComponent<Animator>();
         }
 
+    }
+
+    private void PlaySound(string _soundToPlay)
+    {
+        if (_soundToPlay == "boost")
+        {
+            m_asPlayAudio.clip = m_acBoosterClip;
+        }
+        else if (_soundToPlay == "jump")
+        {
+            //edit
+        }
+        else if (_soundToPlay == "crash")
+        {
+            m_asPlayAudio.clip = m_acCrashClip;
+        }
+        else
+        {
+            print("ERROR");
+        }
+        m_asPlayAudio.Play();
     }
 
     void PushPlayerMovement(Vector3 _newPos)
@@ -328,6 +357,8 @@ public class ControllerHandler : MonoBehaviour
             {
                 Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
                 Invoke("TurnOffScreenShake", 0.5f);
+
+
                 for (int i = 0; i < 8; i++)
                 {
                     if (i != 4)
@@ -338,9 +369,11 @@ public class ControllerHandler : MonoBehaviour
                     {
                         if (g_bPlayerJumping[i] == true)
                         {
-                            this.gameObject.SetActive(false);
                             print("CRASH");
+                            PlaySound("crash");
                             m_bPlayerIsAlive = false;
+                            m_bIsPaused = true;
+                            //this.gameObject.SetActive(false);
                         }
                     }
 
@@ -357,6 +390,7 @@ public class ControllerHandler : MonoBehaviour
                     characterController.Move(g_vec3MovementVector * Time.deltaTime);
                     m_iBoostersPerJump -= 1;
                     print("gap it");
+                    PlaySound("boost");
                 }
             }
             g_vec3MovementVector.y -= gravity * Time.deltaTime;
