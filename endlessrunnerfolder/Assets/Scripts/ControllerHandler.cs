@@ -12,7 +12,19 @@ public class ControllerHandler : MonoBehaviour
 
     private CharacterController characterController;
 
+    enum tricks { KICKFLIP, INVERT_KICKFLIP, TREY_FLIP, INVERT_TREY_FLIP, FLIP, INVERT_FLIP, DEFAULT };
+
+    private tricks m_tLastTrick;
+
+    private tricks m_tCurrentTrick;
+
     private int m_iBoostersPerJump;
+
+    private int m_iTricksPerformedThisJump;
+
+    private int m_iTrickPointsEarned;
+
+    public static int m_iOverallScore;
 
     private float g_fMovementSpeed;
 
@@ -27,6 +39,8 @@ public class ControllerHandler : MonoBehaviour
     private float gravity;
 
     private bool m_bScreenShakeActive;
+
+    private bool m_bAxisReset;
 
     public static bool m_bIsPaused; // could do with a PlayerHandler class..
 
@@ -54,7 +68,7 @@ public class ControllerHandler : MonoBehaviour
 
     public GameObject[] m_goWheels;
 
-    Animator anim;
+    public static Animator anim;
 
     [SerializeField] private AudioClip m_acBoosterClip;
 
@@ -137,6 +151,10 @@ public class ControllerHandler : MonoBehaviour
 
         m_iBoostersPerJump = 3;
 
+        m_iTrickPointsEarned = 0;
+
+        m_iTricksPerformedThisJump = 0;
+
         m_bIsPaused = false;
 
         m_bPlayerIsAlive = true;
@@ -144,6 +162,10 @@ public class ControllerHandler : MonoBehaviour
         m_bSetScreenShake = false;
 
         m_bScreenShakeActive = false;
+
+        m_bAxisReset = false;
+
+        m_tLastTrick = tricks.DEFAULT;
 
         Third_Person_Camera.GetComponent<cameraChanges>().enabled = false;
 
@@ -209,6 +231,8 @@ public class ControllerHandler : MonoBehaviour
                 print("PLAYER IS KICK FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
+                m_tCurrentTrick = tricks.INVERT_KICKFLIP;
+                m_iTrickPointsEarned += 50;
             }
             else if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") < -0.19))
             {
@@ -217,6 +241,8 @@ public class ControllerHandler : MonoBehaviour
 
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
+                m_tCurrentTrick = tricks.TREY_FLIP;
+                m_iTrickPointsEarned += 75;
             }
         }
         else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
@@ -227,6 +253,8 @@ public class ControllerHandler : MonoBehaviour
                 anim.SetTrigger("kickFlipping");
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 0.3f);
+                m_tCurrentTrick = tricks.KICKFLIP;
+                m_iTrickPointsEarned += 50;
             }
             else if (Input.GetAxis("LeftJoystickX_P") < 0.65 && (Input.GetAxis("LeftJoystickY_P") < 0.19))
             {
@@ -234,15 +262,37 @@ public class ControllerHandler : MonoBehaviour
                 print("HERE2");
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
+                m_tCurrentTrick = tricks.INVERT_TREY_FLIP;
+                m_iTrickPointsEarned += 75;
             }
         }
 
-        else if (Input.GetAxis("LeftJoystickY_P") > 0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
+        if (Input.GetAxis("LeftJoystickY_P") > 0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
         {
             anim.SetTrigger("vertFlipping");
             g_bPlayerJumping[4] = true;
             Invoke("TrickRefresh", 1.0f);
+            m_tCurrentTrick = tricks.FLIP;
+            m_iTrickPointsEarned += 25;
         }
+        if (Input.GetAxis("LeftJoystickY_P") < -0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
+        {
+            anim.SetTrigger("isInvertFlipping");
+            g_bPlayerJumping[4] = true;
+            Invoke("TrickRefresh", 1.0f);
+            m_tCurrentTrick = tricks.INVERT_FLIP;
+            m_iTrickPointsEarned += 25;
+        }
+
+        if (g_bPlayerJumping[4])
+        {
+            m_bAxisReset = true;
+        }
+        if (m_tCurrentTrick != m_tLastTrick)
+        {
+            m_iTricksPerformedThisJump += 1; // multiplier
+        }
+        
     }
 
     void TurnOffScreenShake()
@@ -278,6 +328,11 @@ public class ControllerHandler : MonoBehaviour
     {
         if (!m_bIsPaused)
         {
+
+            if (Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19 && Input.GetAxis("LeftJoystickY_P") < 0.19 && Input.GetAxis("LeftJoystickY_P") > -0.19)
+            {
+                m_bAxisReset = false;
+            }
 
             if (m_bSetScreenShake && !m_bScreenShakeActive)
             {
@@ -352,6 +407,7 @@ public class ControllerHandler : MonoBehaviour
                 PushPlayerMovement(g_vec3MovementVector);
                 characterController.Move(g_vec3MovementVector * Time.deltaTime);
                 PlaySound("jump");
+                m_bAxisReset = true;
             }
 
             /***
@@ -360,7 +416,7 @@ public class ControllerHandler : MonoBehaviour
              * 
              ***/
 
-            if (menucontroller.IsPlayingHard() == false && g_bPlayerJumping[3] && !g_bPlayerJumping[4]) // PLAYING EZY
+            if (menucontroller.IsPlayingHard() == false && g_bPlayerJumping[3] && !g_bPlayerJumping[4] && !m_bAxisReset) // PLAYING EZY
             {
                 HandleTricks();
             }
@@ -385,24 +441,37 @@ public class ControllerHandler : MonoBehaviour
                 Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
                 Invoke("TurnOffScreenShake", 0.5f);
 
+                /***
+                 * 
+                 * TRICK POINT SYSTEM
+                 * 
+                 ***/
+
+                statistics.g_globalPoints += (m_iTrickPointsEarned * m_iTricksPerformedThisJump);
+                print(m_iTrickPointsEarned * m_iTricksPerformedThisJump);
+
+                m_iTricksPerformedThisJump = 0;
+                m_iTrickPointsEarned = 0;
+                m_tLastTrick = m_tCurrentTrick;
+                m_tCurrentTrick = tricks.DEFAULT;
+
+                /***
+                 * 
+                 * RESETING NOOBY JUMP BOOL SYSTEM
+                 * 
+                 ***/
 
                 for (int i = 0; i < 8; i++)
                 {
-                    if (i != 4)
-                    {
-                        g_bPlayerJumping[i] = false;
-                    }
-                    else
+                    if (i == 4)
                     {
                         if (g_bPlayerJumping[i] == true)
                         {
                             print("CRASH");
                             PlaySound("crash");
-                            m_bPlayerIsAlive = false;
-                            m_bIsPaused = true;
-                            //this.gameObject.SetActive(false);
                         }
                     }
+                    g_bPlayerJumping[i] = false;
 
                 }
                 m_iBoostersPerJump = 3; // + some integer value (like donuts collected)
