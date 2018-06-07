@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using System.Collections;
 
@@ -155,7 +156,7 @@ public class ControllerHandler : MonoBehaviour
 
     }
 
-    private void PlaySound(string _soundToPlay)
+    public void PlaySound(string _soundToPlay)
     {
         if (_soundToPlay == "boost")
         {
@@ -175,6 +176,11 @@ public class ControllerHandler : MonoBehaviour
             print("ERROR");
         }
         m_asPlayAudio.Play();
+    }
+
+    void ReturnToMain()
+    {
+        SceneManager.LoadScene("mainmenu");
     }
 
     void PushPlayerMovement(Vector3 _newPos)
@@ -430,10 +436,15 @@ public class ControllerHandler : MonoBehaviour
         }
         if (Input.GetButtonUp("XBOXSelectButton"))
         {
-            this.gameObject.SetActive(true);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-   
+        if (Input.GetButtonDown("XBOXSelectButton"))
+        {
+            Invoke("ReturnToMain", 0.4f);
+        }
+
+
     }
 
 }

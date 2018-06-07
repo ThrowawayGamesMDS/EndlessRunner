@@ -29,6 +29,7 @@ public class scoring : MonoBehaviour {
                         Instantiate(roadBlockPopup, canvas.transform);
                         break;
                     case "bluecar":
+                       // ControllerHandler.PlaySound("crash"); // could be like a car horn?
                         Instantiate(blueCarPopup, canvas.transform);
                         break;
                     case "donut":
