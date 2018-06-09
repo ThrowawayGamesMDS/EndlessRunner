@@ -13,7 +13,7 @@ public class timer : MonoBehaviour
     private void Start()
     {
         isGameOver = false ;
-        gameTimer = 100;
+        gameTimer = 60;
     }
     private void Update()
     {
@@ -33,10 +33,7 @@ public class timer : MonoBehaviour
         }
 
     }
-
-	public void timeIncrease(){
-		gameTimer = gameTimer + 5;
-	}
+    
 }
 
 

@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 9
   m_Fog: 1
   m_FogColor: {r: 0.52205884, g: 0.52205884, b: 0.52205884, a: 1}
   m_FogMode: 3
@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44257718, g: 0.49167937, b: 0.571502, a: 1}
+  m_IndirectSpecularColor: {r: 0.44257727, g: 0.4916799, b: 0.57150286, a: 1}
+  m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,11 +55,10 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
-    m_TextureHeight: 1024
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 112000002, guid: 1a285cbf1a19f1a4caa9b82afd4e126f,
     type: 2}
   m_UseShadowmask: 1
@@ -113,7 +114,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1805319992
+--- !u!1001 &787254529
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -151,26 +152,6 @@ Prefab:
     - target: {fileID: 4154656194321694, guid: 31543191f200a8a448a58e3b2dc46f12, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224623528010311068, guid: 31543191f200a8a448a58e3b2dc46f12,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224623528010311068, guid: 31543191f200a8a448a58e3b2dc46f12,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224592892334785394, guid: 31543191f200a8a448a58e3b2dc46f12,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -120.382904
-      objectReference: {fileID: 0}
-    - target: {fileID: 224592892334785394, guid: 31543191f200a8a448a58e3b2dc46f12,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 129.67932
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31543191f200a8a448a58e3b2dc46f12, type: 2}

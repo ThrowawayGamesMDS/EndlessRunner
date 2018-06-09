@@ -491,7 +491,7 @@ public class ControllerHandler : MonoBehaviour
             }
             g_vec3MovementVector.y -= gravity * Time.deltaTime;
         }
-        if (Input.GetButtonUp("XBOXStartButton"))
+        /*if (Input.GetButtonUp("XBOXStartButton"))
         {
             switch (m_bIsPaused)
             {
@@ -511,7 +511,7 @@ public class ControllerHandler : MonoBehaviour
         if (Input.GetButtonDown("XBOXSelectButton"))
         {
             Invoke("ReturnToMain", 0.4f);
-        }
+        }*/
 
 
     }

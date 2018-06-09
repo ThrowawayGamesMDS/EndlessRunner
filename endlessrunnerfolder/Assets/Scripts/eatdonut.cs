@@ -7,7 +7,7 @@ public class eatdonut : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            timer.gameTimer += 2;
+            
             Destroy(gameObject);
         }
     }
