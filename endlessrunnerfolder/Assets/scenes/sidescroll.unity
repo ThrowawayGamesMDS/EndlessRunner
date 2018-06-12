@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 8
   m_Fog: 1
   m_FogColor: {r: 0.52205884, g: 0.52205884, b: 0.52205884, a: 1}
   m_FogMode: 3
@@ -38,8 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44257727, g: 0.4916799, b: 0.57150286, a: 1}
-  m_UseRadianceAmbientProbe: 0
+  m_IndirectSpecularColor: {r: 0.44257718, g: 0.49167937, b: 0.571502, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -55,10 +54,11 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 10
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
-    m_AtlasSize: 1024
+    m_TextureWidth: 1024
+    m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -153,6 +153,35 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114933686870801454, guid: 31543191f200a8a448a58e3b2dc46f12,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31543191f200a8a448a58e3b2dc46f12, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &787254530 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1795094035898384, guid: 31543191f200a8a448a58e3b2dc46f12,
+    type: 2}
+  m_PrefabInternal: {fileID: 787254529}
+--- !u!114 &787254531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 787254530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2013b707f3b196f49b8646da4e5a4131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoadObjs:
+  - {fileID: 1467671553718134, guid: 7e16eb8f9984c4b40b05fcfd3a5611b3, type: 2}
+  - {fileID: 1698496344523806, guid: cdda4523e2f38024f81ae619e23c89f4, type: 2}
+  - {fileID: 1392363444683380, guid: 6a780811970054b4f8ca2cca935aebb7, type: 2}
+  - {fileID: 1818784718029812, guid: a1013be770618e24ebae4a5b5c7cd444, type: 2}
+  PathObjs:
+  - {fileID: 1818784718029812, guid: a1013be770618e24ebae4a5b5c7cd444, type: 2}
+  - {fileID: 1135772160975934, guid: f7ffc8cb895ac54429e670fe3e6b129a, type: 2}
