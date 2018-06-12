@@ -961,6 +961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4126645973697886}
   - component: {fileID: 95529400450037668}
+  - component: {fileID: 114809544459251866}
   m_Layer: 0
   m_Name: ragdollBody
   m_TagString: building
@@ -2353,6 +2354,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementspeed: 5
   rb: {fileID: 54668191089848534}
+--- !u!114 &114809544459251866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1859250283537576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f95b7986683a84381465bce02db3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135283895283069598
 SphereCollider:
   m_ObjectHideFlags: 1

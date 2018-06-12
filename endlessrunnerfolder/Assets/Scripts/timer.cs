@@ -13,7 +13,7 @@ public class timer : MonoBehaviour
     private void Start()
     {
         isGameOver = false ;
-        gameTimer = 60;
+        gameTimer = 5;
     }
     private void Update()
     {

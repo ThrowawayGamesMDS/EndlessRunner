@@ -3,30 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class objectspawner : MonoBehaviour {
-	public List<GameObject> objs;
-	public GameObject obj1;
-	public GameObject obj2;
-	public GameObject obj3;
-	public GameObject obj4;
-	public GameObject obj5;
-	public GameObject obj6;
-	public GameObject obj7;
-	public GameObject obj8;
-	public GameObject obj9;
-    public GameObject obj10;
+	public List<GameObject> roadObjs;
+    public List<GameObject> footpathObjs;
     GameObject rando;
+    private Vector3 stopsignPos = new Vector3(15.53f,0.5f,291.24f);
 	void Start()
 	{
-		objs.Add (obj1);
-		objs.Add (obj2);
-		objs.Add (obj3);
-		objs.Add (obj4);
-		objs.Add (obj5);
-		objs.Add (obj6);	
-		objs.Add (obj7);
-		objs.Add (obj8);
-		objs.Add (obj9);
-        objs.Add (obj10);
+        InvokeRepeating("SpawnStopSign", 0.1f, 1);
 
 
     }
@@ -34,17 +17,40 @@ public class objectspawner : MonoBehaviour {
 	{
         if (!ControllerHandler.m_bIsPaused && ControllerHandler.m_bPlayerIsAlive)
         {
-            spawn();
+            spawnRoad();
+            spawnPath();
+        }
+        else
+        {
+            CancelInvoke();
         }
 	}
 
-	void spawn()
+	void spawnRoad()
 	{
 		int temp = Random.Range (1, 50);
-		if ((temp == 2) || (temp == 48) || (temp == 6) || (temp == 25)) {
-			Instantiate (rando = objs [Random.Range (0, objs.Count)], new Vector3 (Random.Range (-17, 17), 6, 230), rando.transform.rotation);	
+		if ((temp == 2)) {
+			Instantiate (rando = roadObjs [Random.Range (0, roadObjs.Count)], new Vector3 (Random.Range (-11, 11), 1, 295), rando.transform.rotation);	
 		}
 	}
 
+    void spawnPath()
+    {
+        int temp = Random.Range(1, 40);
+        if ((temp == 2) || (temp == 5))
+        {
+            Instantiate(rando = footpathObjs[Random.Range(1, footpathObjs.Count)], new Vector3(Random.Range(-17, -22), 1, 295), rando.transform.rotation);
+        }
+        if ((temp == 24) || (temp == 20))
+        {
+            Instantiate(rando = footpathObjs[Random.Range(1, footpathObjs.Count)], new Vector3(Random.Range(15, 22), 1, 295), rando.transform.rotation);
+        }
+    }
 
+    void SpawnStopSign()
+    {
+        Instantiate(footpathObjs[0], stopsignPos, footpathObjs[0].transform.rotation);
+        Instantiate(footpathObjs[0], new Vector3(-17.5f, stopsignPos.y, stopsignPos.z), footpathObjs[0].transform.rotation);
+
+    }
 }

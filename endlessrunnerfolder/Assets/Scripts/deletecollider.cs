@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class deletecollider : MonoBehaviour {
 
-	void OnTriggerExit(Collider other)
+	void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "building")
         {
