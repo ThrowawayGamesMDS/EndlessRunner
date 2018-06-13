@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 54086088035677926}
   - component: {fileID: 114088700463960328}
   - component: {fileID: 114237715747248462}
+  - component: {fileID: 114615992607323340}
   m_Layer: 0
   m_Name: BlueCar
   m_TagString: building
@@ -212,3 +213,15 @@ MonoBehaviour:
   isWorthPoints: 0
   objName: bluecar
   worth: -690
+--- !u!114 &114615992607323340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698496344523806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a593dddef048c4c902d1a11a4e7dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 1381037133249974, guid: 76219e444d4ef444e8e0123544956bfa, type: 2}

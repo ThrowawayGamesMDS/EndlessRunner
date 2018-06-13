@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class deleteSelf : MonoBehaviour
 {
-
+    public int delTime;
     // Use this for initialization
     void Start()
     {
-        Invoke("destroySelf", 3);
+        Invoke("destroySelf", delTime);
     }
     void destroySelf()
     {

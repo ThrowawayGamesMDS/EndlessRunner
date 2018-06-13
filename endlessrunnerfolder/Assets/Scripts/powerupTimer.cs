@@ -18,6 +18,7 @@ public class powerupTimer : MonoBehaviour {
 		if (other.gameObject.tag == "Player")
 		{
 			timingz = FindObjectOfType<timer>();
+
 			//timingz.timeIncrease ();
 			Destroy(gameObject);
 		}

@@ -11,11 +11,14 @@ public class scoring : MonoBehaviour {
     public GameObject roadBlockPopup;
     public GameObject roadConePopup;
     public GameObject blueCarPopup;
+    public GameObject explosionParticle;
     public float comboTimer;
     public static int comboInt;
     public Text comboTxt;
     public Canvas canvas;
-
+    public AudioSource scream;
+    public AudioSource crate;
+    public AudioSource horn;
 
     private void Start()
     {
@@ -46,12 +49,14 @@ public class scoring : MonoBehaviour {
                         Instantiate(roadBlockPopup, canvas.transform);
                         comboInt += 1;
                         comboTimer = 3;
+                        crate.Play();
                         break;
                     case "bluecar":
                         // ControllerHandler.PlaySound("crash"); // could be like a car horn?
                         comboInt = 1;
                         comboTimer = 3;
                         Instantiate(blueCarPopup, canvas.transform);
+                        horn.Play();
                         break;
                     case "donut":
                         comboInt += 1;
@@ -61,6 +66,18 @@ public class scoring : MonoBehaviour {
                     case "stopsign":
                         comboInt += 1;
                         comboTimer = 3;
+                        Instantiate(stopSignPopup, canvas.transform);
+                        break;
+                    case "body":
+                        comboInt += 1;
+                        comboTimer = 3;
+                        scream.Play();
+                        Instantiate(stopSignPopup, canvas.transform);
+                        break;
+                    case "box":
+                        comboInt += 1;
+                        comboTimer = 3;
+                        crate.Play();
                         Instantiate(stopSignPopup, canvas.transform);
                         break;
                     default:
