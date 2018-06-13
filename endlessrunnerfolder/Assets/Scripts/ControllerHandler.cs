@@ -149,7 +149,7 @@ public class ControllerHandler : MonoBehaviour
 
         m_bTryCheat = false;
 
-        //m_bGravityCheatEnabled = false;
+        m_bGravityCheatEnabled = false;
 
         //First_Person_Camera.gameObject.SetActive(false);
         //Third_Person_Camera.gameObject.SetActive(true);
@@ -241,7 +241,7 @@ public class ControllerHandler : MonoBehaviour
               {
                     if (i == 0)
                     {
-                          if (m_sPlayerCheats[i] == "B")
+                        if (m_sPlayerCheats[i] == "B")
                           {
                                 if (m_sPlayerCheats[i + 1] == "A")
                                 {
@@ -250,22 +250,24 @@ public class ControllerHandler : MonoBehaviour
                                            if (m_sPlayerCheats[i + 3] == "X")
                                            {
                                                 cheat = true;
-                                                switch (m_bCheatEnabled[i])
+                                                switch (m_bGravityCheatEnabled)
                                                 {
                                                     case true:
                                                         {
-                                                            m_bCheatEnabled[i] = false;
+                                                            m_bGravityCheatEnabled = false;
                                                             g_fGravity = 9.8f * 3.0f;
+                                                            g_fJumpPower = 7 * 3.5f;
                                                             break;
                                                         }
                                                     case false:
                                                         {
-                                                            m_bCheatEnabled[i] = true;
+                                                            m_bGravityCheatEnabled = true;
                                                             g_fGravity = 9.8f * 6.0f;
+                                                            g_fJumpPower = 7 * 7.0f;
                                                             break;
                                                         }
                                                 }
-                                                if (m_bCheatEnabled[0])
+                                                if (m_bGravityCheatEnabled)
                                                 {
                                                     print("CHEAT [BABX] ACTIVATED");
                                                 }
@@ -279,8 +281,25 @@ public class ControllerHandler : MonoBehaviour
                                      }
                                 }
                           }
-                      
-                    }
+                        else if (m_sPlayerCheats[i] == "A")
+                        {
+                            if (m_sPlayerCheats[i + 1] == "A")
+                            {
+                                if (m_sPlayerCheats[i + 2] == "A")
+                                {
+                                    if (m_sPlayerCheats[i + 3] == "A")
+                                    {
+                                        cheat = true;
+                                        timer.gameTimer += 60.0f;
+                                        print("updated timer shite");
+                                        m_bTryCheat = false;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+
+            }
               }
         if (cheat) //successful cheat entered
         {
