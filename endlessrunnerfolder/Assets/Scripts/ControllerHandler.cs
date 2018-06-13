@@ -36,7 +36,7 @@ public class ControllerHandler : MonoBehaviour
 
     private float g_fCharacterDirection;
 
-    private float gravity;
+    private float g_fGravity;
 
     private bool m_bScreenShakeActive;
 
@@ -147,7 +147,8 @@ public class ControllerHandler : MonoBehaviour
 
         g_fTimer = 1.5f;
 
-        gravity = 20;
+        // g_fGravity = 20;
+        g_fGravity = 9.8f * 3; // g * mass
 
         m_iBoostersPerJump = 3;
 
@@ -171,10 +172,10 @@ public class ControllerHandler : MonoBehaviour
 
         m_asPlayAudio = GetComponent<AudioSource>();
 
-        if (menucontroller.IsPlayingHard() == false)
-        {
+        //if (menucontroller.IsPlayingHard() == false)
+        //{
             anim = GetComponent<Animator>();
-        }
+       // }
 
     }
 
@@ -489,7 +490,7 @@ public class ControllerHandler : MonoBehaviour
                     PlaySound("boost");
                 }
             }
-            g_vec3MovementVector.y -= gravity * Time.deltaTime;
+            g_vec3MovementVector.y -= g_fGravity * Time.deltaTime;
         }
         /*if (Input.GetButtonUp("XBOXStartButton"))
         {
