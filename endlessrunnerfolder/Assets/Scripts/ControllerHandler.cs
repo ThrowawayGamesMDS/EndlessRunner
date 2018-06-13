@@ -38,6 +38,8 @@ public class ControllerHandler : MonoBehaviour
 
     private float g_fGravity;
 
+    private bool m_bTryCheat;
+
     private bool m_bScreenShakeActive;
 
     private bool m_bAxisReset;
@@ -46,7 +48,17 @@ public class ControllerHandler : MonoBehaviour
 
     public static bool m_bPlayerIsAlive; // could do with a PlayerHandler class..
 
+    private bool m_bPlayerUsingCheat;
+
     private bool[] g_bPlayerJumping;
+
+    private string[] m_sPlayerCheats;
+
+    private int m_iCurrentCheatSequence;
+
+    private bool[] m_bCheatEnabled; //0 == gravity cheat
+
+    private bool m_bGravityCheatEnabled;
 
     private float m_rotationSensitivity;
 
@@ -123,6 +135,22 @@ public class ControllerHandler : MonoBehaviour
             g_bPlayerJumping[i] = false;
         }
 
+        m_sPlayerCheats = new string[8];
+        for (int i = 0; i < 8; i++)
+        {
+            m_sPlayerCheats[i] = "";
+        }
+
+        m_bCheatEnabled = new bool[8];
+        for (int i = 0; i < 8; i++)
+        {
+            m_bCheatEnabled[i] = false;
+        }
+
+        m_bTryCheat = false;
+
+        //m_bGravityCheatEnabled = false;
+
         //First_Person_Camera.gameObject.SetActive(false);
         //Third_Person_Camera.gameObject.SetActive(true);
         g_bFirstPersonCamera = false;
@@ -136,6 +164,8 @@ public class ControllerHandler : MonoBehaviour
             print("Controller Connected");
             print(g_sarrControllerID[0]);
         }
+
+        m_iCurrentCheatSequence = 0;
 
         m_rotationSensitivity = 30.5f;
 
@@ -177,6 +207,88 @@ public class ControllerHandler : MonoBehaviour
             anim = GetComponent<Animator>();
        // }
 
+    }
+
+    int NumberOfOperations() // cheating
+    {
+        int size = 0;
+        for (int i = 0; i < 8; i++)
+        {
+           if (m_sPlayerCheats[i] != "")
+            {
+                size += 1;
+            }
+        }
+        return size;
+    }
+
+    bool CheckIfTricking()
+    {
+       for (int i = 0; i < 8; i ++)
+        {
+            if (m_bCheatEnabled[i] == true)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void CheckPlayerEnteringCheat()
+    {
+     bool cheat = false;
+              for (int i = 0;i < NumberOfOperations(); i++)
+              {
+                    if (i == 0)
+                    {
+                          if (m_sPlayerCheats[i] == "B")
+                          {
+                                if (m_sPlayerCheats[i + 1] == "A")
+                                {
+                                     if (m_sPlayerCheats[i + 2] == "B")
+                                     {
+                                           if (m_sPlayerCheats[i + 3] == "X")
+                                           {
+                                                cheat = true;
+                                                switch (m_bCheatEnabled[i])
+                                                {
+                                                    case true:
+                                                        {
+                                                            m_bCheatEnabled[i] = false;
+                                                            g_fGravity = 9.8f * 3.0f;
+                                                            break;
+                                                        }
+                                                    case false:
+                                                        {
+                                                            m_bCheatEnabled[i] = true;
+                                                            g_fGravity = 9.8f * 6.0f;
+                                                            break;
+                                                        }
+                                                }
+                                                if (m_bCheatEnabled[0])
+                                                {
+                                                    print("CHEAT [BABX] ACTIVATED");
+                                                }
+                                                else
+                                                {
+                                                    print("CHEAT [BABX] DEACTIVATED");
+                                                }
+                                                m_bTryCheat = false;
+                                                return;
+                                           }
+                                     }
+                                }
+                          }
+                      
+                    }
+              }
+        if (cheat) //successful cheat entered
+        {
+             for (int i = 0; i < 8; i++)
+             {
+                 m_sPlayerCheats[i] = "";
+             }
+        }
     }
 
     public void PlaySound(string _soundToPlay)
@@ -324,11 +436,81 @@ public class ControllerHandler : MonoBehaviour
         g_bPlayerJumping[4] = false;
     }
 
+    void CheatRefresh()
+    {
+        m_bPlayerUsingCheat = false;
+        m_iCurrentCheatSequence = 0;
+        for (int i = 0; i < 8; i++)
+        {
+            m_sPlayerCheats[i] = "";
+        }
+        m_bTryCheat = false;
+        print("DISABLING CHEATS");
+    }
+
+    void ResetingPlayerTricks()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            m_bCheatEnabled[i] = false;
+        }
+    }
+
     void Update()
 
     {
         if (!m_bIsPaused)
         {
+            /***
+             * 
+             * Cheat shit
+             * 
+             ***/
+
+            if (Input.GetButtonUp("XBOXL1Button"))
+            {
+                m_bPlayerUsingCheat = true;
+            /*    if (CheckIfTricking())
+                {
+                    ResetingPlayerTricks();
+                }*/
+                print("ENABLING CHEATS");
+                m_bTryCheat = true;
+                Invoke("CheatRefresh", 5.0f);
+            }
+
+            if (m_bPlayerUsingCheat)
+            {
+                if (Input.GetButtonUp("XBOXAButton"))
+                {
+                   m_sPlayerCheats[m_iCurrentCheatSequence] = "A";
+                   m_iCurrentCheatSequence += 1;
+                }
+                if (Input.GetButtonUp("XBOXBButton"))
+                {
+                    m_sPlayerCheats[m_iCurrentCheatSequence] = "B";
+                    m_iCurrentCheatSequence += 1;
+                }
+                if (Input.GetButtonUp("XBOXXButton"))
+                {
+                    m_sPlayerCheats[m_iCurrentCheatSequence] = "X";
+                    m_iCurrentCheatSequence += 1;
+                }
+                if (Input.GetButtonUp("XBOXYButton"))
+                {
+                    m_sPlayerCheats[m_iCurrentCheatSequence] = "Y";
+                    m_iCurrentCheatSequence += 1;
+                }
+
+                //if (NumberOfOperations() >= 4 && !CheckIfTricking())
+                if(NumberOfOperations() >= 4 && m_bTryCheat)
+                {
+                    CheckPlayerEnteringCheat();
+                }
+            }
+
+            /** End of cheat shit **/
+
 
             if (Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19 && Input.GetAxis("LeftJoystickY_P") < 0.19 && Input.GetAxis("LeftJoystickY_P") > -0.19)
             {
