@@ -354,10 +354,12 @@ public class ControllerHandler : MonoBehaviour
 
     void HandleTricks()
     {
-        if (Input.GetAxis("LeftJoystickX_P") < -0.44)
+        //if (Input.GetAxis("LeftJoystickX_P") < -0.44)
+        if (Input.GetAxis("RightJoystickX_P") < -0.44)
         {
             print("EZY TRYNA TRICK1");
-            if (Input.GetAxis("LeftJoystickX_P") < -0.45)
+            // if (Input.GetAxis("LeftJoystickX_P") < -0.45)
+            if (Input.GetAxis("RightJoystickX_P") < -0.45)
             {
                 anim.SetTrigger("invertKickFlipping");
                 print("PLAYER IS KICK FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
@@ -366,10 +368,11 @@ public class ControllerHandler : MonoBehaviour
                 m_tCurrentTrick = tricks.INVERT_KICKFLIP;
                 m_iTrickPointsEarned += 50;
             }
-            else if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") < -0.19))
+            //else if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") < -0.19))
+            else if (Input.GetAxis("RightJoystickX_P") < -0.65 && (Input.GetAxis("RightJoystickY_P") < -0.19))
             {
                 anim.SetTrigger("isFlipping");
-                print("PLAYER IS TREY FLIPPING: " + Input.GetAxis("LeftJoystickX_P") + " || " + Input.GetAxis("LeftJoystickY_P"));
+                print("PLAYER IS TREY FLIPPING: " + Input.GetAxis("RightJoystickX_P") + " , " + Input.GetAxis("RightJoystickY_P"));
 
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
@@ -377,10 +380,12 @@ public class ControllerHandler : MonoBehaviour
                 m_iTrickPointsEarned += 75;
             }
         }
-        else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
+        // else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
+        else if (Input.GetAxis("RightJoystickX_P") > 0.19)
         {
             print("EZY TRYNA TRICK2");
-            if (Input.GetAxis("LeftJoystickX_P") > 0.45)
+            //if (Input.GetAxis("LeftJoystickX_P") > 0.45)
+            if (Input.GetAxis("RightJoystickX_P") > 0.45)
             {
                 anim.SetTrigger("kickFlipping");
                 g_bPlayerJumping[4] = true;
@@ -388,7 +393,8 @@ public class ControllerHandler : MonoBehaviour
                 m_tCurrentTrick = tricks.KICKFLIP;
                 m_iTrickPointsEarned += 50;
             }
-            else if (Input.GetAxis("LeftJoystickX_P") < 0.65 && (Input.GetAxis("LeftJoystickY_P") < 0.19))
+            // else if (Input.GetAxis("LeftJoystickX_P") < 0.65 && (Input.GetAxis("LeftJoystickY_P") < 0.19))
+            else if (Input.GetAxis("RightJoystickX_P") < 0.65 && (Input.GetAxis("RightJoystickY_P") < 0.19))
             {
                 anim.SetTrigger("isFlipping");
                 print("HERE2");
@@ -399,7 +405,8 @@ public class ControllerHandler : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("LeftJoystickY_P") > 0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
+        //if (Input.GetAxis("LeftJoystickY_P") > 0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
+        if (Input.GetAxis("RightJoystickY_P") > 0.9f && Input.GetAxis("RightJoystickX_P") < 0.19 && Input.GetAxis("RightJoystickX_P") > -0.19)
         {
             anim.SetTrigger("vertFlipping");
             g_bPlayerJumping[4] = true;
@@ -407,8 +414,9 @@ public class ControllerHandler : MonoBehaviour
             m_tCurrentTrick = tricks.FLIP;
             m_iTrickPointsEarned += 25;
         }
-        if (Input.GetAxis("LeftJoystickY_P") < -0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
-        {
+       // if (Input.GetAxis("LeftJoystickY_P") < -0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
+        if (Input.GetAxis("RightJoystickY_P") < -0.9f && Input.GetAxis("RightJoystickX_P") < 0.19 && Input.GetAxis("RightJoystickX_P") > -0.19)
+            {
             anim.SetTrigger("isInvertFlipping");
             g_bPlayerJumping[4] = true;
             Invoke("TrickRefresh", 1.0f);
@@ -488,14 +496,18 @@ public class ControllerHandler : MonoBehaviour
 
             if (Input.GetButtonUp("XBOXL1Button"))
             {
-                m_bPlayerUsingCheat = true;
-            /*    if (CheckIfTricking())
+                //if (!m_bGravityCheatEnabled ||)
+                if (!m_bGravityCheatEnabled)
                 {
-                    ResetingPlayerTricks();
-                }*/
-                print("ENABLING CHEATS");
-                m_bTryCheat = true;
-                Invoke("CheatRefresh", 5.0f);
+                    m_bPlayerUsingCheat = true;
+                    /*    if (CheckIfTricking())
+                        {
+                            ResetingPlayerTricks();
+                        }*/
+                    print("ENABLING CHEATS");
+                    m_bTryCheat = true;
+                    Invoke("CheatRefresh", 5.0f);
+                }
             }
 
             if (m_bPlayerUsingCheat)
@@ -527,11 +539,12 @@ public class ControllerHandler : MonoBehaviour
                     CheckPlayerEnteringCheat();
                 }
             }
-
+           
             /** End of cheat shit **/
 
 
-            if (Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19 && Input.GetAxis("LeftJoystickY_P") < 0.19 && Input.GetAxis("LeftJoystickY_P") > -0.19)
+            // if (Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19 && Input.GetAxis("LeftJoystickY_P") < 0.19 && Input.GetAxis("LeftJoystickY_P") > -0.19)
+            if (Input.GetAxis("RightJoystickX_P") < 0.19 && Input.GetAxis("RightJoystickX_P") > -0.19 && Input.GetAxis("RightJoystickY_P") < 0.19 && Input.GetAxis("RightJoystickY_P") > -0.19)
             {
                 m_bAxisReset = false;
             }
@@ -548,14 +561,17 @@ public class ControllerHandler : MonoBehaviour
         * Handle side-to-side movement
         * 
         ***/
-            if (!g_bPlayerJumping[3] && (Input.GetAxis("RightJoystickX_P") > 0.19 || Input.GetAxis("RightJoystickX_P") < 0.19)) // stops the player's x movement whilst in the air.
+            // if (!g_bPlayerJumping[3] && (Input.GetAxis("RightJoystickX_P") > 0.19 || Input.GetAxis("RightJoystickX_P") < 0.19)) // stops the player's x movement whilst in the air.
+            if (!g_bPlayerJumping[3] && (Input.GetAxis("LeftJoystickX_P") > 0.19 || Input.GetAxis("LeftJoystickX_P") < 0.19)) // stops the player's x movement whilst in the air.
             {
-                g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * g_fMovementSpeed;
+                //g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * g_fMovementSpeed;
+                g_vec3MovementVector.x = Input.GetAxis("LeftJoystickX_P") * g_fMovementSpeed;
                 PushPlayerMovement(g_vec3MovementVector);
             }
             else
             {
-                g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * (g_fMovementSpeed / 3);
+                //g_vec3MovementVector.x = Input.GetAxis("RightJoystickX_P") * (g_fMovementSpeed / 3);
+                g_vec3MovementVector.x = Input.GetAxis("LeftJoystickX_P") * (g_fMovementSpeed / 3);
                 PushPlayerMovement(g_vec3MovementVector);
             }
 
@@ -565,7 +581,8 @@ public class ControllerHandler : MonoBehaviour
              * 
              ***/
 
-            if (Input.GetAxis("LeftJoystickY_P") > 0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
+            // if (Input.GetAxis("LeftJoystickY_P") > 0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
+            if (Input.GetAxis("RightJoystickY_P") > 0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5])
             {
                 if (g_bPlayerJumping[0] && !g_bPlayerJumping[7])
                 {
@@ -583,7 +600,8 @@ public class ControllerHandler : MonoBehaviour
                 // Invoke("RefreshShit", 0.1f);
             }
 
-            else if (Input.GetAxis("LeftJoystickY_P") < -0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
+            //else if (Input.GetAxis("LeftJoystickY_P") < -0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5]) // ++
+            else if (Input.GetAxis("RightJoystickY_P") < -0.7 && !g_bPlayerJumping[3] && !g_bPlayerJumping[5])
             {
                 if (g_bPlayerJumping[0] == true && !g_bPlayerJumping[6])
                 {
