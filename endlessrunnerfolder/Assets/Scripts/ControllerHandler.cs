@@ -538,6 +538,11 @@ public class ControllerHandler : MonoBehaviour
                 {
                     CheckPlayerEnteringCheat();
                 }
+                else if (NumberOfOperations() >= 4 && !m_bTryCheat)
+                {
+                    // cancel invoke?
+                    // call CheatReset
+                }
             }
            
             /** End of cheat shit **/
