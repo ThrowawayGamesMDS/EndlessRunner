@@ -40,13 +40,13 @@ public class scoring : MonoBehaviour {
                 ControllerHandler.m_bSetScreenShake = true;
                 switch (other.gameObject.GetComponent<PointManager>().objName)
                 {
-                    case "cone":
-                        Instantiate(roadConePopup, canvas.transform);
+				case "cone":
+						popupManager.popupQueue.Add(roadConePopup);
                         comboInt += 1;
                         comboTimer = 3;
                         break;
                     case "roadblock":
-                        Instantiate(roadBlockPopup, canvas.transform);
+						popupManager.popupQueue.Add(roadBlockPopup);
                         comboInt += 1;
                         comboTimer = 3;
                         crate.Play();
@@ -55,30 +55,30 @@ public class scoring : MonoBehaviour {
                         // ControllerHandler.PlaySound("crash"); // could be like a car horn?
                         comboInt = 1;
                         comboTimer = 3;
-                        Instantiate(blueCarPopup, canvas.transform);
+						popupManager.popupQueue.Add(blueCarPopup);
                         horn.Play();
                         break;
                     case "donut":
                         comboInt += 1;
                         comboTimer = 3;
-                        Instantiate(donutPopup, canvas.transform);
+						popupManager.popupQueue.Add(donutPopup);
                         break;
                     case "stopsign":
                         comboInt += 1;
                         comboTimer = 3;
-                        Instantiate(stopSignPopup, canvas.transform);
+						popupManager.popupQueue.Add(stopSignPopup);
                         break;
                     case "body":
                         comboInt += 1;
                         comboTimer = 3;
                         scream.Play();
-                        Instantiate(stopSignPopup, canvas.transform);
+						popupManager.popupQueue.Add(roadConePopup);
                         break;
                     case "box":
                         comboInt += 1;
                         comboTimer = 3;
                         crate.Play();
-                        Instantiate(stopSignPopup, canvas.transform);
+						popupManager.popupQueue.Add(roadConePopup);
                         break;
                     default:
                         break;
