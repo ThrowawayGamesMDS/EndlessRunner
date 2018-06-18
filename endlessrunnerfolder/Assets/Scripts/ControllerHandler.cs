@@ -151,8 +151,8 @@ public class ControllerHandler : MonoBehaviour
 
         m_bGravityCheatEnabled = false;
 
-        //First_Person_Camera.gameObject.SetActive(false);
-        //Third_Person_Camera.gameObject.SetActive(true);
+        First_Person_Camera.gameObject.SetActive(false);
+        Third_Person_Camera.gameObject.SetActive(true);
         g_bFirstPersonCamera = false;
 
         //Player-Controller Allocation Initialization
@@ -435,14 +435,49 @@ public class ControllerHandler : MonoBehaviour
         
     }
 
+    void SetScreenShake()
+    {   
+        switch(g_bFirstPersonCamera)
+        {
+            case true:
+                First_Person_Camera.GetComponent<cameraChanges>().enabled = true;
+                break;
+            case false:
+                Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
+                break;
+        }
+
+        m_bScreenShakeActive = true;
+        Invoke("TurnOffScreenShake", 0.4f);
+        print("ACTIVATED SCREEN SHAKE");
+    }
+
     void TurnOffScreenShake()
     {
-        Third_Person_Camera.GetComponent<cameraChanges>().enabled = false;
-
-        if (m_bSetScreenShake)
+        switch(g_bFirstPersonCamera)
         {
-            m_bSetScreenShake = false;
-            m_bScreenShakeActive = false;
+            case true:
+                {
+                    First_Person_Camera.GetComponent<cameraChanges>().enabled = false;
+
+                    if (m_bSetScreenShake)
+                    {
+                        m_bSetScreenShake = false;
+                        m_bScreenShakeActive = false;
+                    }
+                    break;
+                }
+            case false:
+                {
+                    Third_Person_Camera.GetComponent<cameraChanges>().enabled = false;
+
+                    if (m_bSetScreenShake)
+                    {
+                        m_bSetScreenShake = false;
+                        m_bScreenShakeActive = false;
+                    }
+                    break;
+                }
         }
     }
 
@@ -488,6 +523,24 @@ public class ControllerHandler : MonoBehaviour
     {
         if (!m_bIsPaused)
         {
+            if (Input.GetButtonUp("XBOXSelectButton"))
+            {
+                // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                switch(g_bFirstPersonCamera)
+                {
+                    case true:
+                        First_Person_Camera.gameObject.SetActive(false);
+                        Third_Person_Camera.gameObject.SetActive(true);
+                        g_bFirstPersonCamera = false;
+                        break;
+                    case false:
+                        First_Person_Camera.gameObject.SetActive(true);
+                        Third_Person_Camera.gameObject.SetActive(false);
+                        g_bFirstPersonCamera = true;
+                        break;
+                }
+            }
+
             /***
              * 
              * Cheat shit
@@ -551,9 +604,10 @@ public class ControllerHandler : MonoBehaviour
 
             if (m_bSetScreenShake && !m_bScreenShakeActive)
             {
-                Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
-                m_bScreenShakeActive = true;
-                Invoke("TurnOffScreenShake", 0.4f);
+                SetScreenShake();
+                //Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
+                //m_bScreenShakeActive = true;
+                //Invoke("TurnOffScreenShake", 0.4f);
             }
 
             /***
@@ -658,8 +712,9 @@ public class ControllerHandler : MonoBehaviour
 
             if (characterController.isGrounded == true && g_bPlayerJumping[3])
             {
-                Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
-                Invoke("TurnOffScreenShake", 0.5f);
+                //Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
+                //Invoke("TurnOffScreenShake", 0.5f);
+                SetScreenShake();
 
                 /***
                  * 
@@ -711,6 +766,9 @@ public class ControllerHandler : MonoBehaviour
             }
             g_vec3MovementVector.y -= g_fGravity * Time.deltaTime;
         }
+
+        // 
+
         /*if (Input.GetButtonUp("XBOXStartButton"))
         {
             switch (m_bIsPaused)
