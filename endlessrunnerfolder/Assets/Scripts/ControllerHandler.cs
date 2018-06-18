@@ -255,15 +255,13 @@ public class ControllerHandler : MonoBehaviour
                                                     case true:
                                                         {
                                                             m_bGravityCheatEnabled = false;
-                                                            g_fGravity = 9.8f * 3.0f;
                                                             g_fJumpPower = 7 * 3.5f;
                                                             break;
                                                         }
                                                     case false:
                                                         {
                                                             m_bGravityCheatEnabled = true;
-                                                            g_fGravity = 9.8f * 6.0f;
-                                                            g_fJumpPower = 7 * 7.0f;
+                                                            g_fJumpPower = 7 * 4.5f;
                                                             break;
                                                         }
                                                 }
