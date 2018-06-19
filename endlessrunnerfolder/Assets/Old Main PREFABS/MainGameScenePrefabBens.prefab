@@ -1684,6 +1684,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1719,6 +1720,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3133,9 +3135,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 84e6a61c3d62d1644af4ea94d87e8781, type: 3}
 --- !u!64 &64407112824563426
@@ -3147,9 +3149,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 84e6a61c3d62d1644af4ea94d87e8781, type: 3}
 --- !u!64 &64640988022588434
@@ -3161,9 +3163,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 84e6a61c3d62d1644af4ea94d87e8781, type: 3}
 --- !u!65 &65045940226799548
@@ -3853,16 +3855,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4c278bb3e82c840868ab510303e1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objs: []
-  obj1: {fileID: 1818784718029812, guid: a1013be770618e24ebae4a5b5c7cd444, type: 2}
-  obj2: {fileID: 1818784718029812, guid: a1013be770618e24ebae4a5b5c7cd444, type: 2}
-  obj3: {fileID: 1392363444683380, guid: 6a780811970054b4f8ca2cca935aebb7, type: 2}
-  obj4: {fileID: 1135772160975934, guid: f7ffc8cb895ac54429e670fe3e6b129a, type: 2}
-  obj5: {fileID: 1135772160975934, guid: f7ffc8cb895ac54429e670fe3e6b129a, type: 2}
-  obj6: {fileID: 1467671553718134, guid: 7e16eb8f9984c4b40b05fcfd3a5611b3, type: 2}
-  obj7: {fileID: 1467671553718134, guid: 7e16eb8f9984c4b40b05fcfd3a5611b3, type: 2}
-  obj8: {fileID: 1698496344523806, guid: cdda4523e2f38024f81ae619e23c89f4, type: 2}
-  obj9: {fileID: 1698496344523806, guid: cdda4523e2f38024f81ae619e23c89f4, type: 2}
+  roadObjs: []
+  footpathObjs: []
 --- !u!114 &114221687379722248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4008,7 +4002,13 @@ MonoBehaviour:
     type: 2}
   blueCarPopup: {fileID: 1933468690821292, guid: d7bb56c3b59066d469bbddfc2ecbc137,
     type: 2}
+  explosionParticle: {fileID: 0}
+  comboTimer: 0
+  comboTxt: {fileID: 0}
   canvas: {fileID: 223876587280375514}
+  scream: {fileID: 0}
+  crate: {fileID: 0}
+  horn: {fileID: 0}
 --- !u!114 &114482567690372910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4160,6 +4160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerTxt: {fileID: 114573920385616574}
+  gameoverobj: {fileID: 0}
 --- !u!114 &114870016532285976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4718,11 +4719,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 1
@@ -5438,6 +5439,47 @@ ParticleSystem:
         - serializedVersion: 2
           time: 1
           value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    speedModifier:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6835,6 +6877,7 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
+    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -6879,12 +6922,14 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
+    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -7635,7 +7680,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113657613260600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -196.25, y: 199, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224113741449121838}
@@ -7653,7 +7698,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1664359064565452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 357, y: 199, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224113741449121838}
