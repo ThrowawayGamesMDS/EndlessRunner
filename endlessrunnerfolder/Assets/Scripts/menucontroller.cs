@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class menucontroller : MonoBehaviour {
+    public List<Sprite> buttons;
     public Image option1;
     public Image option2;
     public Image option3;
@@ -148,19 +149,20 @@ public class menucontroller : MonoBehaviour {
             switch (selector)
             {
                 case 1:
-                    option1.rectTransform.localScale = new Vector3(3, 3, 0);
-                    option2.rectTransform.localScale = new Vector3(2, 2, 0);
-                    option3.rectTransform.localScale = new Vector3(2, 2, 0);
+                    option1.sprite = buttons[1];
+                    option2.sprite = buttons[0];
+                    option3.sprite = buttons[0];
+
                     break;
                 case 2:
-                    option2.rectTransform.localScale = new Vector3(3, 3, 0);
-                    option1.rectTransform.localScale = new Vector3(2, 2, 0);
-                    option3.rectTransform.localScale = new Vector3(2, 2, 0);
+                    option1.sprite = buttons[0];
+                    option2.sprite = buttons[1];
+                    option3.sprite = buttons[0];
                     break;
                 case 3:
-                    option3.rectTransform.localScale = new Vector3(3, 3, 0);
-                    option2.rectTransform.localScale = new Vector3(2, 2, 0);
-                    option1.rectTransform.localScale = new Vector3(2, 2, 0);
+                    option1.sprite = buttons[0];
+                    option2.sprite = buttons[0];
+                    option3.sprite = buttons[1];
                     break;
                 default:
                     break;
@@ -171,12 +173,12 @@ public class menucontroller : MonoBehaviour {
             switch (selector)
             {
                 case 1:
-                    firstperson.rectTransform.localScale = new Vector3(3, 3, 0);
-                    thirdperson.rectTransform.localScale = new Vector3(2, 2, 0);
+                    firstperson.sprite = buttons[1];
+                    thirdperson.sprite = buttons[0];
                     break;
                 case 2:
-                    thirdperson.rectTransform.localScale = new Vector3(3, 3, 0);
-                    firstperson.rectTransform.localScale = new Vector3(2, 2, 0);
+                    thirdperson.sprite = buttons[1];
+                    firstperson.sprite = buttons[0];
                     break;
                 default:
                     break;
