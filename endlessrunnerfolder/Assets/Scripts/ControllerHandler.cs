@@ -398,7 +398,7 @@ public class ControllerHandler : MonoBehaviour
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
                 m_tCurrentTrick = tricks.INVERT_KICKFLIP;
-                m_iTrickPointsEarned += 50;
+                m_iTrickPointsEarned += (50 * m_iTricksPerformedThisJump);
             }
             //else if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") < -0.19))
             else if (Input.GetAxis("RightJoystickX_P") < -0.65 && (Input.GetAxis("RightJoystickY_P") < -0.19))
@@ -409,7 +409,7 @@ public class ControllerHandler : MonoBehaviour
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
                 m_tCurrentTrick = tricks.TREY_FLIP;
-                m_iTrickPointsEarned += 75;
+                m_iTrickPointsEarned += (75 * m_iTricksPerformedThisJump);
             }
         }
         // else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
@@ -423,7 +423,7 @@ public class ControllerHandler : MonoBehaviour
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 0.3f);
                 m_tCurrentTrick = tricks.KICKFLIP;
-                m_iTrickPointsEarned += 50;
+                m_iTrickPointsEarned += (50 * m_iTricksPerformedThisJump);
             }
             // else if (Input.GetAxis("LeftJoystickX_P") < 0.65 && (Input.GetAxis("LeftJoystickY_P") < 0.19))
             else if (Input.GetAxis("RightJoystickX_P") < 0.65 && (Input.GetAxis("RightJoystickY_P") < 0.19))
@@ -433,7 +433,7 @@ public class ControllerHandler : MonoBehaviour
                 g_bPlayerJumping[4] = true;
                 Invoke("TrickRefresh", 1.0f);
                 m_tCurrentTrick = tricks.INVERT_TREY_FLIP;
-                m_iTrickPointsEarned += 75;
+                m_iTrickPointsEarned += (75 * m_iTricksPerformedThisJump);
             }
         }
 
@@ -444,7 +444,7 @@ public class ControllerHandler : MonoBehaviour
             g_bPlayerJumping[4] = true;
             Invoke("TrickRefresh", 1.0f);
             m_tCurrentTrick = tricks.FLIP;
-            m_iTrickPointsEarned += 25;
+            m_iTrickPointsEarned += (25 * m_iTricksPerformedThisJump);
         }
        // if (Input.GetAxis("LeftJoystickY_P") < -0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
         if (Input.GetAxis("RightJoystickY_P") < -0.9f && Input.GetAxis("RightJoystickX_P") < 0.19 && Input.GetAxis("RightJoystickX_P") > -0.19)
@@ -453,15 +453,13 @@ public class ControllerHandler : MonoBehaviour
             g_bPlayerJumping[4] = true;
             Invoke("TrickRefresh", 1.0f);
             m_tCurrentTrick = tricks.INVERT_FLIP;
-            m_iTrickPointsEarned += 25;
+            m_iTrickPointsEarned += (25 * m_iTricksPerformedThisJump);
         }
-
-        if (g_bPlayerJumping[4])
+        
+        if (m_tCurrentTrick != m_tLastTrick && g_bPlayerJumping[4])
         {
             m_bAxisReset = true;
-        }
-        if (m_tCurrentTrick != m_tLastTrick)
-        {
+            timer.gameTimer += (2.5f * m_iTricksPerformedThisJump);
             m_iTricksPerformedThisJump += 1; // multiplier
         }
         
@@ -762,7 +760,7 @@ public class ControllerHandler : MonoBehaviour
                 statistics.g_globalPoints += (m_iTrickPointsEarned * m_iTricksPerformedThisJump);
                 print(m_iTrickPointsEarned * m_iTricksPerformedThisJump);
 
-                m_iTricksPerformedThisJump = 0;
+                m_iTricksPerformedThisJump = 1; // default one for the multiplier so it doesnt give 0 points...
                 m_iTrickPointsEarned = 0;
                 m_tLastTrick = m_tCurrentTrick;
                 m_tCurrentTrick = tricks.DEFAULT;
