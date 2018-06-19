@@ -58,7 +58,9 @@ public class ControllerHandler : MonoBehaviour
 
     private bool[] m_bCheatEnabled; //0 == gravity cheat
 
-    private bool m_bGravityCheatEnabled;
+    private bool m_bJumpCheatEnabled;
+
+    private bool m_bJumpGravityEnabled;
 
     private float m_rotationSensitivity;
 
@@ -149,7 +151,18 @@ public class ControllerHandler : MonoBehaviour
 
         m_bTryCheat = false;
 
-        m_bGravityCheatEnabled = false;
+        m_bJumpCheatEnabled = false;
+        m_bJumpGravityEnabled = false;
+
+        m_bIsPaused = false;
+
+        m_bPlayerIsAlive = true;
+
+        m_bSetScreenShake = false;
+
+        m_bScreenShakeActive = false;
+
+        m_bAxisReset = false;
 
         First_Person_Camera.gameObject.SetActive(false);
         Third_Person_Camera.gameObject.SetActive(true);
@@ -185,16 +198,6 @@ public class ControllerHandler : MonoBehaviour
         m_iTrickPointsEarned = 0;
 
         m_iTricksPerformedThisJump = 0;
-
-        m_bIsPaused = false;
-
-        m_bPlayerIsAlive = true;
-
-        m_bSetScreenShake = false;
-
-        m_bScreenShakeActive = false;
-
-        m_bAxisReset = false;
 
         m_tLastTrick = tricks.DEFAULT;
 
@@ -250,22 +253,22 @@ public class ControllerHandler : MonoBehaviour
                                            if (m_sPlayerCheats[i + 3] == "X")
                                            {
                                                 cheat = true;
-                                                switch (m_bGravityCheatEnabled)
+                                                switch (m_bJumpCheatEnabled)
                                                 {
                                                     case true:
                                                         {
-                                                            m_bGravityCheatEnabled = false;
+                                                            m_bJumpCheatEnabled = false;
                                                             g_fJumpPower = 7 * 3.5f;
                                                             break;
                                                         }
                                                     case false:
                                                         {
-                                                            m_bGravityCheatEnabled = true;
+                                                            m_bJumpCheatEnabled = true;
                                                             g_fJumpPower = 7 * 4.5f;
                                                             break;
                                                         }
                                                 }
-                                                if (m_bGravityCheatEnabled)
+                                                if (m_bJumpCheatEnabled)
                                                 {
                                                     print("CHEAT [BABX] ACTIVATED");
                                                 }
@@ -295,7 +298,38 @@ public class ControllerHandler : MonoBehaviour
                                     }
                                 }
                             }
+                    else if (m_sPlayerCheats[i + 1] == "X")
+                    {
+                        if (m_sPlayerCheats[i + 2] == "X")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "A")
+                            {
+                                cheat = true;
+
+                                switch (m_bJumpGravityEnabled)
+                                {
+                                    case true:
+                                        {
+                                            m_bJumpGravityEnabled = false;
+                                            g_fGravity = 9.8f * 3;
+                                            print("gravity cheat disabled");
+                                            break;
+                                        }
+                                    case false:
+                                        {
+                                            m_bJumpGravityEnabled = true;
+                                            g_fGravity = 9.8f * 2.0f;
+                                            print("gravity cheat enabled");
+                                            break;
+                                        }
+                                }
+                                m_bTryCheat = false;
+                                return;
+                            }
                         }
+                    }
+                }
+                        
 
             }
               }
@@ -547,8 +581,8 @@ public class ControllerHandler : MonoBehaviour
 
             if (Input.GetButtonUp("XBOXL1Button"))
             {
-                //if (!m_bGravityCheatEnabled ||)
-                if (!m_bGravityCheatEnabled)
+                //if (!m_bJumpCheatEnabled ||)
+                if (!m_bJumpCheatEnabled)
                 {
                     m_bPlayerUsingCheat = true;
                     /*    if (CheckIfTricking())

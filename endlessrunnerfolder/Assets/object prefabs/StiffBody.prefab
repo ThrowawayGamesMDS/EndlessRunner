@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 114204039064817860}
   - component: {fileID: 114775878050795642}
   m_Layer: 0
-  m_Name: stiffBody
+  m_Name: StiffBody
   m_TagString: building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2092,7 +2092,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114204039064817860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2157,7 +2156,6 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 997c5bb4d5885fd469d39d8cc57d0c02, type: 2}
   - {fileID: 2100000, guid: f3e43bf679e3e994aab8b73e08d77ef7, type: 2}
