@@ -48,9 +48,7 @@ public class menucontroller : MonoBehaviour {
                 switch(selector)
                 {
                     case 1:
-                        mainmenu.SetActive(false);
-                        perspective.SetActive(true);
-                        whatMenu = perspectivemenu;
+                        SceneManager.LoadScene("sidescroll");
                         break;
                     case 2:
                         mainmenu.SetActive(false);

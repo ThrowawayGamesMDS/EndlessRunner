@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114088700463960328}
   - component: {fileID: 114237715747248462}
   - component: {fileID: 114615992607323340}
+  - component: {fileID: 114801542435672140}
   m_Layer: 0
   m_Name: BlueCar
   m_TagString: building
@@ -225,3 +226,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1381037133249974, guid: 76219e444d4ef444e8e0123544956bfa, type: 2}
+--- !u!114 &114801542435672140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1698496344523806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a4d75b65d6029448cff900fe00f9ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tex:
+  - {fileID: 2800000, guid: 7f8242005ee89524cb10e2122bf7c06d, type: 3}
+  - {fileID: 2800000, guid: bb465726bbe2ba3419c3f3c83172557b, type: 3}
+  - {fileID: 2800000, guid: 424eb384e12fd5048bef31b6b349da1f, type: 3}

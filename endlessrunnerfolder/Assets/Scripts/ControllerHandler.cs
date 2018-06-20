@@ -103,6 +103,7 @@ public class ControllerHandler : MonoBehaviour
 
     public CanvasGroup m_cgTrickDisplay;
 
+    public static int SpawnerSystem;
 
     /***
      * 
@@ -138,7 +139,7 @@ public class ControllerHandler : MonoBehaviour
 
     void Start()
     {
-
+        SpawnerSystem = 0;
         print("WIDTH: " + Screen.width + ", HEIGHT: " + Screen.height);
 
         // Jumping bool setup
@@ -268,123 +269,192 @@ public class ControllerHandler : MonoBehaviour
 
     void CheckPlayerEnteringCheat()
     {
-     bool cheat = false;
-              for (int i = 0;i < NumberOfOperations(); i++)
-              {
-                    if (i == 0)
+        bool cheat = false;
+        for (int i = 0; i < NumberOfOperations(); i++)
+        {
+            if (i == 0)
+            {
+                if (m_sPlayerCheats[i] == "B") // B
+                {
+                    if (m_sPlayerCheats[i + 1] == "A") // B | A-B-X
                     {
-                        if (m_sPlayerCheats[i] == "B") // B
-                          {
-                                if (m_sPlayerCheats[i + 1] == "A") // B | A-B-X
-                                {
-                                     if (m_sPlayerCheats[i + 2] == "B")
-                                     {
-                                           if (m_sPlayerCheats[i + 3] == "X")
-                                           {
-                                                cheat = true;
-                                                switch (m_bJumpCheatEnabled)
-                                                {
-                                                    case true:
-                                                        {
-                                                            m_bJumpCheatEnabled = false;
-                                                            UpdateCheatPopupText("Super Jump Disabled!");
-                                                            g_fJumpPower = 7 * 3.5f;
-                                                            break;
-                                                        }
-                                                    case false:
-                                                        {
-                                                            m_bJumpCheatEnabled = true;
-                                                            UpdateCheatPopupText("Super Jump Enabled!");
-                                                            g_fJumpPower = 7 * 4.5f;
-                                                            break;
-                                                        }
-                                                }
-                                                m_bTryCheat = false;
-                                                return;
-                                           }
-                                     }
-                                }
-                          }
-                        else if (m_sPlayerCheats[i] == "A") // A
+                        if (m_sPlayerCheats[i + 2] == "B")
                         {
-                            if (m_sPlayerCheats[i + 1] == "A")// A | A-A-A
+                            if (m_sPlayerCheats[i + 3] == "X")
                             {
-                                if (m_sPlayerCheats[i + 2] == "A")
+                                cheat = true;
+                                switch (m_bJumpCheatEnabled)
                                 {
-                                    if (m_sPlayerCheats[i + 3] == "A")
-                                    {
-                                        cheat = true;
-                                        timer.gameTimer += 60.0f;
-                                        UpdateCheatPopupText("Bonus 60 Second Cheat");
-                                        m_bTryCheat = false;
-                                        return;
-                                    }
-                                }
-                            }
-                            else if (m_sPlayerCheats[i + 1] == "X") // A | X-X-A
-                            {
-                                if (m_sPlayerCheats[i + 2] == "X")
-                                {
-                                    if (m_sPlayerCheats[i + 3] == "A")
-                                    {
-                                        cheat = true;
-
-                                        switch (m_bJumpGravityEnabled)
+                                    case true:
                                         {
-                                            case true:
-                                                {
-                                                    m_bJumpGravityEnabled = false;
-                                                    g_fGravity = 9.8f * 3.0f;
-                                                    UpdateCheatPopupText("Gravity cheat disabled!");
-                                                   // UpdatePop
+                                            m_bJumpCheatEnabled = false;
+                                            UpdateCheatPopupText("Super Jump Disabled!");
+                                            g_fJumpPower = 7 * 3.5f;
                                             break;
-                                                }
-                                            case false:
-                                                {
-                                                    m_bJumpGravityEnabled = true;
-                                                    g_fGravity = 9.8f * 2.0f;
-                                                    UpdateCheatPopupText("Gravity cheat enabled!");
-                                                    break;
-                                                }
                                         }
-                                        m_bTryCheat = false;
-                                        return;
-                                    }
-                                }
-                            }
-                            else if (m_sPlayerCheats[i + 1] == "Y")
-                            {
-                                if (m_sPlayerCheats[i + 2] == "X")
-                                {
-                                    if (m_sPlayerCheats[i + 3] == "A")
-                                    {
-                                        cheat = true;
-
-                                        switch (m_bSlowMotionActivated)
+                                    case false:
                                         {
-                                            case true:
-                                                {
-                                                    m_bSlowMotionActivated = false;
-                                                    UpdateCheatPopupText("Slow Motion Disabled!");
-                                                    break;
-                                                }
-                                            case false:
-                                                {
-                                                    m_bSlowMotionActivated = true;
-                                                    UpdateCheatPopupText("Slow Motion Enabled!");
-                                                    break;
-                                                }
+                                            m_bJumpCheatEnabled = true;
+                                            UpdateCheatPopupText("Super Jump Enabled!");
+                                            g_fJumpPower = 7 * 4.5f;
+                                            break;
                                         }
-                                        m_bTryCheat = false;
-                                        return;
-                                    }
                                 }
-                            } // A | Y-X-A
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
+                    else if (m_sPlayerCheats[i + 1] == "B") // B | A-B-X
+                    {
+                        if (m_sPlayerCheats[i + 2] == "B")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "B")
+                            {
+                                cheat = true;
+                                switch (SpawnerSystem)
+                                {
+                                    case 0:
+                                        {
+                                            SpawnerSystem = 1;
+                                            UpdateCheatPopupText("Pram Mode Enabled!");
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            SpawnerSystem = 0;
+                                            UpdateCheatPopupText("Pram Mode Disabled!");
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            SpawnerSystem = 1;
+                                            UpdateCheatPopupText("Pram Mode Enabled!");
+                                            break;
+                                        }
+                                }
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
                 }
-                        
+                else if (m_sPlayerCheats[i] == "A") // A
+                {
+                    if (m_sPlayerCheats[i + 1] == "A")// A | A-A-A
+                    {
+                        if (m_sPlayerCheats[i + 2] == "A")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "A")
+                            {
+                                cheat = true;
+                                timer.gameTimer += 60.0f;
+                                UpdateCheatPopupText("Bonus 60 Second Cheat");
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
+                    else if (m_sPlayerCheats[i + 1] == "X") // A | X-X-A
+                    {
+                        if (m_sPlayerCheats[i + 2] == "X")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "A")
+                            {
+                                cheat = true;
+
+                                switch (m_bJumpGravityEnabled)
+                                {
+                                    case true:
+                                        {
+                                            m_bJumpGravityEnabled = false;
+                                            g_fGravity = 9.8f * 3.0f;
+                                            UpdateCheatPopupText("Gravity cheat disabled!");
+                                            // UpdatePop
+                                            break;
+                                        }
+                                    case false:
+                                        {
+                                            m_bJumpGravityEnabled = true;
+                                            g_fGravity = 9.8f * 2.0f;
+                                            UpdateCheatPopupText("Gravity cheat enabled!");
+                                            break;
+                                        }
+                                }
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
+                    else if (m_sPlayerCheats[i + 1] == "Y")
+                    {
+                        if (m_sPlayerCheats[i + 2] == "X")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "A")
+                            {
+                                cheat = true;
+
+                                switch (m_bSlowMotionActivated)
+                                {
+                                    case true:
+                                        {
+                                            m_bSlowMotionActivated = false;
+                                            UpdateCheatPopupText("Slow Motion Disabled!");
+                                            break;
+                                        }
+                                    case false:
+                                        {
+                                            m_bSlowMotionActivated = true;
+                                            UpdateCheatPopupText("Slow Motion Enabled!");
+                                            break;
+                                        }
+                                }
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
+                    // A | Y-X-A
+                }
+                if (m_sPlayerCheats[i] == "X") // B
+                {
+                    if (m_sPlayerCheats[i + 1] == "X") // B | A-B-X
+                    {
+                        if (m_sPlayerCheats[i + 2] == "X")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "X")
+                            {
+                                cheat = true;
+                                switch (SpawnerSystem)
+                                {
+                                    case 0:
+                                        {
+                                            SpawnerSystem = 2;
+                                            UpdateCheatPopupText("Giant Mode Enabled!");
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            SpawnerSystem = 2;
+                                            UpdateCheatPopupText("Giant Mode Enabled!");
+                                            break;
+                                        }
+                                    case 2:
+                                        {
+                                            SpawnerSystem = 0;
+                                            UpdateCheatPopupText("Giant Mode Disabled!");
+                                            break;
+                                        }
+                                }
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
+                }
 
             }
-              }
+        }
         if (cheat) //successful cheat entered
         {
             CheatRefresh();

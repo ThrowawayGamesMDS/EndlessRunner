@@ -11,6 +11,3 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/sidescroll.unity
     guid: f0460849e7802674a87d132cd225160f
-  - enabled: 1
-    path: Assets/scenes/first.unity
-    guid: 6e7926e6d5ac16d45b5da99a29b8188a

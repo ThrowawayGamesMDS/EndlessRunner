@@ -83,7 +83,7 @@ public class scoring : MonoBehaviour {
                     case "body":
                         comboInt += 1;
                         comboTimer = 3;
-                        scream.Play();
+                        //scream.Play();
 						popupManager.popupQueue.Add(dummyPopup);
                         break;
                     case "box":
