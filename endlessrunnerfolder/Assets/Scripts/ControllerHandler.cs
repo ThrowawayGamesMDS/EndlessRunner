@@ -834,7 +834,7 @@ public class ControllerHandler : MonoBehaviour
 
         // 
 
-        /*if (Input.GetButtonUp("XBOXStartButton"))
+        if (Input.GetButtonUp("XBOXStartButton"))
         {
             switch (m_bIsPaused)
             {
@@ -846,6 +846,7 @@ public class ControllerHandler : MonoBehaviour
                     break;
             }
         }
+        /*
         if (Input.GetButtonUp("XBOXSelectButton"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

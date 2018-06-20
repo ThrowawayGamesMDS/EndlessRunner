@@ -27,6 +27,12 @@ public class movegorund : MonoBehaviour
                 rb.velocity += temp;
             }
         }
+        else if (ControllerHandler.m_bIsPaused)
+        {
+            Vector3 temp = new Vector3(0, 0, 0);
+            rb.velocity = temp;
+        }
 
-	}
+
+    }
 }

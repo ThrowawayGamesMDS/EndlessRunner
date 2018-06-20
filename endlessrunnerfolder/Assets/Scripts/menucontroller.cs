@@ -111,7 +111,7 @@ public class menucontroller : MonoBehaviour {
         }
         else if (whatMenu == optionsmenu)
         {
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetButtonUp("XBOXBButton"))
             {
                 mainmenu.SetActive(true);
                 options.SetActive(false);
