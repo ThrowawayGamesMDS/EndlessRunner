@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 using System.Collections;
 
@@ -93,6 +94,10 @@ public class ControllerHandler : MonoBehaviour
     [SerializeField] private AudioClip m_acJumpClip;
 
     private AudioSource m_asPlayAudio;
+
+    public Text m_tCheatPopup;
+
+    public CanvasGroup m_cgPopupDisplay;
 
 
     /***
@@ -241,6 +246,14 @@ public class ControllerHandler : MonoBehaviour
         return false;
     }
 
+    void UpdateCheatPopupText(string _sDisplayPopup)
+    {
+        //GameObject obj = GameObject.CreatePrimitive(Cheat_Popup_Text)
+
+        m_tCheatPopup.text = _sDisplayPopup;
+        m_cgPopupDisplay.alpha = 1;
+    }
+
     void CheckPlayerEnteringCheat()
     {
      bool cheat = false;
@@ -262,23 +275,17 @@ public class ControllerHandler : MonoBehaviour
                                                     case true:
                                                         {
                                                             m_bJumpCheatEnabled = false;
+                                                            UpdateCheatPopupText("Super Jump Disabled!");
                                                             g_fJumpPower = 7 * 3.5f;
                                                             break;
                                                         }
                                                     case false:
                                                         {
                                                             m_bJumpCheatEnabled = true;
+                                                            UpdateCheatPopupText("Super Jump Enabled!");
                                                             g_fJumpPower = 7 * 4.5f;
                                                             break;
                                                         }
-                                                }
-                                                if (m_bJumpCheatEnabled)
-                                                {
-                                                    print("CHEAT [BABX] ACTIVATED");
-                                                }
-                                                else
-                                                {
-                                                    print("CHEAT [BABX] DEACTIVATED");
                                                 }
                                                 m_bTryCheat = false;
                                                 return;
@@ -296,7 +303,7 @@ public class ControllerHandler : MonoBehaviour
                                     {
                                         cheat = true;
                                         timer.gameTimer += 60.0f;
-                                        print("updated timer shite");
+                                        UpdateCheatPopupText("Bonus 60 Second Cheat");
                                         m_bTryCheat = false;
                                         return;
                                     }
@@ -316,14 +323,15 @@ public class ControllerHandler : MonoBehaviour
                                                 {
                                                     m_bJumpGravityEnabled = false;
                                                     g_fGravity = 9.8f * 3.0f;
-                                                    print("gravity cheat disabled");
-                                                    break;
+                                                    UpdateCheatPopupText("Gravity cheat disabled!");
+                                                   // UpdatePop
+                                            break;
                                                 }
                                             case false:
                                                 {
                                                     m_bJumpGravityEnabled = true;
                                                     g_fGravity = 9.8f * 2.0f;
-                                                    print("gravity cheat enabled");
+                                                    UpdateCheatPopupText("Gravity cheat enabled!");
                                                     break;
                                                 }
                                         }
@@ -345,13 +353,13 @@ public class ControllerHandler : MonoBehaviour
                                             case true:
                                                 {
                                                     m_bSlowMotionActivated = false;
-                                                    print("slowmo cheat disabled");
+                                                    UpdateCheatPopupText("Slow Motion Disabled!");
                                                     break;
                                                 }
                                             case false:
                                                 {
                                                     m_bSlowMotionActivated = true;
-                                                    print("slowmo cheat enabled");
+                                                    UpdateCheatPopupText("Slow Motion Enabled!");
                                                     break;
                                                 }
                                         }
@@ -389,6 +397,7 @@ public class ControllerHandler : MonoBehaviour
         else
         {
             print("ERROR");
+            return;
         }
         m_asPlayAudio.Play();
     }
