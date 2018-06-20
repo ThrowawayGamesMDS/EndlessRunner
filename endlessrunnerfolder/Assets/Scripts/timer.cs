@@ -23,7 +23,16 @@ public class timer : MonoBehaviour
             timerTxt.text = Mathf.RoundToInt(gameTimer).ToString();
         }
 
-		if (gameTimer <= 0)
+        if (gameTimer <= 10)
+        {
+            timerTxt.color = Color.red;
+        }
+        else
+        {
+            timerTxt.color = Color.white;
+        }
+
+        if (gameTimer <= 0)
         {
             isGameOver = true;
             gameoverobj.SetActive(true);
