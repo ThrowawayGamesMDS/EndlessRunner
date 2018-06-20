@@ -248,9 +248,9 @@ public class ControllerHandler : MonoBehaviour
               {
                     if (i == 0)
                     {
-                        if (m_sPlayerCheats[i] == "B")
+                        if (m_sPlayerCheats[i] == "B") // B
                           {
-                                if (m_sPlayerCheats[i + 1] == "A")
+                                if (m_sPlayerCheats[i + 1] == "A") // B | A-B-X
                                 {
                                      if (m_sPlayerCheats[i + 2] == "B")
                                      {
@@ -286,9 +286,9 @@ public class ControllerHandler : MonoBehaviour
                                      }
                                 }
                           }
-                        else if (m_sPlayerCheats[i] == "A")
+                        else if (m_sPlayerCheats[i] == "A") // A
                         {
-                            if (m_sPlayerCheats[i + 1] == "A")
+                            if (m_sPlayerCheats[i + 1] == "A")// A | A-A-A
                             {
                                 if (m_sPlayerCheats[i + 2] == "A")
                                 {
@@ -302,64 +302,64 @@ public class ControllerHandler : MonoBehaviour
                                     }
                                 }
                             }
-                    else if (m_sPlayerCheats[i + 1] == "X")
-                    {
-                        if (m_sPlayerCheats[i + 2] == "X")
-                        {
-                            if (m_sPlayerCheats[i + 3] == "A")
+                            else if (m_sPlayerCheats[i + 1] == "X") // A | X-X-A
                             {
-                                cheat = true;
-
-                                switch (m_bJumpGravityEnabled)
+                                if (m_sPlayerCheats[i + 2] == "X")
                                 {
-                                    case true:
+                                    if (m_sPlayerCheats[i + 3] == "A")
+                                    {
+                                        cheat = true;
+
+                                        switch (m_bJumpGravityEnabled)
                                         {
-                                            m_bJumpGravityEnabled = false;
-                                            g_fGravity = 9.8f * 3.0f;
-                                            print("gravity cheat disabled");
-                                            break;
+                                            case true:
+                                                {
+                                                    m_bJumpGravityEnabled = false;
+                                                    g_fGravity = 9.8f * 3.0f;
+                                                    print("gravity cheat disabled");
+                                                    break;
+                                                }
+                                            case false:
+                                                {
+                                                    m_bJumpGravityEnabled = true;
+                                                    g_fGravity = 9.8f * 2.0f;
+                                                    print("gravity cheat enabled");
+                                                    break;
+                                                }
                                         }
-                                    case false:
-                                        {
-                                            m_bJumpGravityEnabled = true;
-                                            g_fGravity = 9.8f * 2.0f;
-                                            print("gravity cheat enabled");
-                                            break;
-                                        }
+                                        m_bTryCheat = false;
+                                        return;
+                                    }
                                 }
-                                m_bTryCheat = false;
-                                return;
                             }
-                        }
-                    }
-                    else if (m_sPlayerCheats[i + 1] == "Y")
-                    {
-                        if (m_sPlayerCheats[i + 2] == "X")
-                        {
-                            if (m_sPlayerCheats[i + 3] == "A")
+                            else if (m_sPlayerCheats[i + 1] == "Y")
                             {
-                                cheat = true;
-
-                                switch (m_bSlowMotionActivated)
+                                if (m_sPlayerCheats[i + 2] == "X")
                                 {
-                                    case true:
+                                    if (m_sPlayerCheats[i + 3] == "A")
+                                    {
+                                        cheat = true;
+
+                                        switch (m_bSlowMotionActivated)
                                         {
-                                            m_bSlowMotionActivated = false;
-                                            print("slowmo cheat disabled");
-                                            break;
+                                            case true:
+                                                {
+                                                    m_bSlowMotionActivated = false;
+                                                    print("slowmo cheat disabled");
+                                                    break;
+                                                }
+                                            case false:
+                                                {
+                                                    m_bSlowMotionActivated = true;
+                                                    print("slowmo cheat enabled");
+                                                    break;
+                                                }
                                         }
-                                    case false:
-                                        {
-                                            m_bSlowMotionActivated = true;
-                                            print("slowmo cheat enabled");
-                                            break;
-                                        }
+                                        m_bTryCheat = false;
+                                        return;
+                                    }
                                 }
-                                m_bTryCheat = false;
-                                return;
-                            }
-                        }
-                    }
+                            } // A | Y-X-A
                 }
                         
 
