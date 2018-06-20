@@ -44,6 +44,8 @@ public class ControllerHandler : MonoBehaviour
 
     private bool m_bAxisReset;
 
+    public static bool m_bSlowMotionActivated;
+
     public static bool m_bIsPaused; // could do with a PlayerHandler class..
 
     public static bool m_bPlayerIsAlive; // could do with a PlayerHandler class..
@@ -163,6 +165,8 @@ public class ControllerHandler : MonoBehaviour
         m_bScreenShakeActive = false;
 
         m_bAxisReset = false;
+
+        m_bSlowMotionActivated = false;
 
         First_Person_Camera.gameObject.SetActive(false);
         Third_Person_Camera.gameObject.SetActive(true);
@@ -311,7 +315,7 @@ public class ControllerHandler : MonoBehaviour
                                     case true:
                                         {
                                             m_bJumpGravityEnabled = false;
-                                            g_fGravity = 9.8f * 3;
+                                            g_fGravity = 9.8f * 3.0f;
                                             print("gravity cheat disabled");
                                             break;
                                         }
@@ -328,6 +332,34 @@ public class ControllerHandler : MonoBehaviour
                             }
                         }
                     }
+                    else if (m_sPlayerCheats[i + 1] == "Y")
+                    {
+                        if (m_sPlayerCheats[i + 2] == "X")
+                        {
+                            if (m_sPlayerCheats[i + 3] == "A")
+                            {
+                                cheat = true;
+
+                                switch (m_bSlowMotionActivated)
+                                {
+                                    case true:
+                                        {
+                                            m_bSlowMotionActivated = false;
+                                            print("slowmo cheat disabled");
+                                            break;
+                                        }
+                                    case false:
+                                        {
+                                            m_bSlowMotionActivated = true;
+                                            print("slowmo cheat enabled");
+                                            break;
+                                        }
+                                }
+                                m_bTryCheat = false;
+                                return;
+                            }
+                        }
+                    }
                 }
                         
 
@@ -335,10 +367,7 @@ public class ControllerHandler : MonoBehaviour
               }
         if (cheat) //successful cheat entered
         {
-             for (int i = 0; i < 8; i++)
-             {
-                 m_sPlayerCheats[i] = "";
-             }
+            CheatRefresh();
         }
     }
 
@@ -479,7 +508,6 @@ public class ControllerHandler : MonoBehaviour
 
         m_bScreenShakeActive = true;
         Invoke("TurnOffScreenShake", 0.4f);
-        print("ACTIVATED SCREEN SHAKE");
     }
 
     void TurnOffScreenShake()
@@ -579,19 +607,26 @@ public class ControllerHandler : MonoBehaviour
 
             if (Input.GetButtonUp("XBOXL1Button"))
             {
-                //if (!m_bJumpCheatEnabled ||)
-                if (!m_bJumpCheatEnabled)
+                if(m_bPlayerUsingCheat)
+                {
+                    CheatRefresh();
+                    m_bPlayerUsingCheat = false;
+                }
+                else
                 {
                     m_bPlayerUsingCheat = true;
-                    /*    if (CheckIfTricking())
-                        {
-                            ResetingPlayerTricks();
-                        }*/
                     print("ENABLING CHEATS");
                     m_bTryCheat = true;
                     Invoke("CheatRefresh", 5.0f);
                 }
-            }
+                /*
+                //if (!m_bJumpCheatEnabled ||)
+                    m_bPlayerUsingCheat = true;
+                    print("ENABLING CHEATS");
+                    m_bTryCheat = true;
+                    Invoke("CheatRefresh", 5.0f);*/
+                 
+                }
 
             if (m_bPlayerUsingCheat)
             {
@@ -640,12 +675,9 @@ public class ControllerHandler : MonoBehaviour
             if (m_bSetScreenShake && !m_bScreenShakeActive)
             {
                 SetScreenShake();
-                //Third_Person_Camera.GetComponent<cameraChanges>().enabled = true;
-                //m_bScreenShakeActive = true;
-                //Invoke("TurnOffScreenShake", 0.4f);
             }
 
-            /***
+        /***
         * 
         * Handle side-to-side movement
         * 
@@ -777,7 +809,6 @@ public class ControllerHandler : MonoBehaviour
                     {
                         if (g_bPlayerJumping[i] == true)
                         {
-                            print("CRASH");
                             PlaySound("crash");
                         }
                     }
@@ -795,7 +826,6 @@ public class ControllerHandler : MonoBehaviour
                     PushPlayerMovement(g_vec3MovementVector);
                     characterController.Move(g_vec3MovementVector * Time.deltaTime);
                     m_iBoostersPerJump -= 1;
-                    print("gap it");
                     PlaySound("boost");
                 }
             }
