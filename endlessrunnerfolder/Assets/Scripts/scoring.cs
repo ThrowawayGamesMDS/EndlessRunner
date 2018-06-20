@@ -22,6 +22,12 @@ public class scoring : MonoBehaviour {
     public AudioSource scream;
     public AudioSource crate;
     public AudioSource horn;
+    public AudioSource cone;
+    public AudioSource sign;
+    public AudioSource roadblock;
+    public AudioSource bin;
+
+
 
     private void Start()
     {
@@ -47,12 +53,13 @@ public class scoring : MonoBehaviour {
 						popupManager.popupQueue.Add(roadConePopup);
                         comboInt += 1;
                         comboTimer = 3;
+                        cone.Play();
                         break;
                     case "roadblock":
 						popupManager.popupQueue.Add(roadBlockPopup);
                         comboInt += 1;
                         comboTimer = 3;
-                        crate.Play();
+                        roadblock.Play();
                         break;
                     case "bluecar":
                         // ControllerHandler.PlaySound("crash"); // could be like a car horn?
@@ -70,6 +77,7 @@ public class scoring : MonoBehaviour {
                         comboInt += 1;
                         comboTimer = 3;
 						popupManager.popupQueue.Add(stopSignPopup);
+                        sign.Play();
                         break;
                     case "body":
                         comboInt += 1;
