@@ -52,7 +52,7 @@ public class BundyPopup : MonoBehaviour {
         }
     }
 
-    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerptime = 1.5f)
+    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerptime = 2.0f)
     {
         float _timeStartedLerping = Time.time;
         float timeSinceStarted = Time.time - _timeStartedLerping;

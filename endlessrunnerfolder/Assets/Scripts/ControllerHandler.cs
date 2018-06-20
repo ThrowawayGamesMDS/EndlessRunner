@@ -97,7 +97,11 @@ public class ControllerHandler : MonoBehaviour
 
     public Text m_tCheatPopup;
 
-    public CanvasGroup m_cgPopupDisplay;
+    public CanvasGroup m_cgCheatDisplay;
+
+    public Text m_tTrickPopup;
+
+    public CanvasGroup m_cgTrickDisplay;
 
 
     /***
@@ -251,7 +255,15 @@ public class ControllerHandler : MonoBehaviour
         //GameObject obj = GameObject.CreatePrimitive(Cheat_Popup_Text)
 
         m_tCheatPopup.text = _sDisplayPopup;
-        m_cgPopupDisplay.alpha = 1;
+        m_cgCheatDisplay.alpha = 1;
+    }
+
+    void UpdateTrickPopupText(string _sDisplayPopup)
+    {
+        //GameObject obj = GameObject.CreatePrimitive(Cheat_Popup_Text)
+
+        m_tTrickPopup.text = _sDisplayPopup;
+        m_cgTrickDisplay.alpha = 1;
     }
 
     void CheckPlayerEnteringCheat()
@@ -437,6 +449,7 @@ public class ControllerHandler : MonoBehaviour
                 Invoke("TrickRefresh", 1.0f);
                 m_tCurrentTrick = tricks.INVERT_KICKFLIP;
                 m_iTrickPointsEarned += (50 * m_iTricksPerformedThisJump);
+                UpdateTrickPopupText("Inverse Kick-Flip +" + (50 * m_iTricksPerformedThisJump).ToString() + " points!");
             }
             //else if (Input.GetAxis("LeftJoystickX_P") < -0.65 && (Input.GetAxis("LeftJoystickY_P") < -0.19))
             else if (Input.GetAxis("RightJoystickX_P") < -0.65 && (Input.GetAxis("RightJoystickY_P") < -0.19))
@@ -448,6 +461,8 @@ public class ControllerHandler : MonoBehaviour
                 Invoke("TrickRefresh", 1.0f);
                 m_tCurrentTrick = tricks.TREY_FLIP;
                 m_iTrickPointsEarned += (75 * m_iTricksPerformedThisJump);
+
+                UpdateTrickPopupText("Trey-Flipping +" + (75 * m_iTricksPerformedThisJump).ToString() + " points!");
             }
         }
         // else if (Input.GetAxis("LeftJoystickX_P") > 0.19)
@@ -462,6 +477,8 @@ public class ControllerHandler : MonoBehaviour
                 Invoke("TrickRefresh", 0.3f);
                 m_tCurrentTrick = tricks.KICKFLIP;
                 m_iTrickPointsEarned += (50 * m_iTricksPerformedThisJump);
+
+                UpdateTrickPopupText("Kick-Flipping +" + (50 * m_iTricksPerformedThisJump).ToString() + " points!");
             }
             // else if (Input.GetAxis("LeftJoystickX_P") < 0.65 && (Input.GetAxis("LeftJoystickY_P") < 0.19))
             else if (Input.GetAxis("RightJoystickX_P") < 0.65 && (Input.GetAxis("RightJoystickY_P") < 0.19))
@@ -472,6 +489,8 @@ public class ControllerHandler : MonoBehaviour
                 Invoke("TrickRefresh", 1.0f);
                 m_tCurrentTrick = tricks.INVERT_TREY_FLIP;
                 m_iTrickPointsEarned += (75 * m_iTricksPerformedThisJump);
+
+                UpdateTrickPopupText("Inverse Trey-Flipping +" + (75 * m_iTricksPerformedThisJump).ToString() + " points!");
             }
         }
 
@@ -483,6 +502,8 @@ public class ControllerHandler : MonoBehaviour
             Invoke("TrickRefresh", 1.0f);
             m_tCurrentTrick = tricks.FLIP;
             m_iTrickPointsEarned += (25 * m_iTricksPerformedThisJump);
+
+            UpdateTrickPopupText("Back-Flipping +" + (25 * m_iTricksPerformedThisJump).ToString() + " points!");
         }
        // if (Input.GetAxis("LeftJoystickY_P") < -0.9f && Input.GetAxis("LeftJoystickX_P") < 0.19 && Input.GetAxis("LeftJoystickX_P") > -0.19)
         if (Input.GetAxis("RightJoystickY_P") < -0.9f && Input.GetAxis("RightJoystickX_P") < 0.19 && Input.GetAxis("RightJoystickX_P") > -0.19)
@@ -492,6 +513,8 @@ public class ControllerHandler : MonoBehaviour
             Invoke("TrickRefresh", 1.0f);
             m_tCurrentTrick = tricks.INVERT_FLIP;
             m_iTrickPointsEarned += (25 * m_iTricksPerformedThisJump);
+
+            UpdateTrickPopupText("Front-Flipping +" + (25 * m_iTricksPerformedThisJump).ToString() + " points!");
         }
         
         if (m_tCurrentTrick != m_tLastTrick && g_bPlayerJumping[4])
