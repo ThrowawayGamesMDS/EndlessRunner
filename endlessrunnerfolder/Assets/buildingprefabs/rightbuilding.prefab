@@ -130,9 +130,10 @@ GameObject:
   - component: {fileID: 65542006186917670}
   - component: {fileID: 54527498428951830}
   - component: {fileID: 114542661089074694}
+  - component: {fileID: 114664096027410152}
   m_Layer: 0
   m_Name: rightbuilding
-  m_TagString: building
+  m_TagString: buildingprefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,7 +414,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457471932064592}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -318.3829, y: -130.42068, z: 4.5}
+  m_LocalPosition: {x: -319.08292, y: -130.40068, z: 4.4610443}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4162017811213710}
@@ -1016,8 +1017,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.105404, y: 10.586424, z: 193.80153}
-  m_Center: {x: -17.80485, y: 5.4349146, z: 92.02589}
+  m_Size: {x: 12.024914, y: 10.586424, z: 193.80153}
+  m_Center: {x: -16.7646, y: 5.4349146, z: 92.02589}
 --- !u!95 &95034275776511856
 Animator:
   serializedVersion: 3
@@ -1252,3 +1253,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tr: {fileID: 4895324960146408}
   movementspeed: 3
+--- !u!114 &114664096027410152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457471932064592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f95b7986683a84381465bce02db3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delTime: 5

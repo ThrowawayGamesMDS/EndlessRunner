@@ -6,6 +6,7 @@ TagManager:
   tags:
   - building
   - roadTile
+  - buildingprefab
   layers:
   - Default
   - TransparentFX

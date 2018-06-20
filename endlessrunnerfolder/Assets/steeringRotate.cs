@@ -11,6 +11,6 @@ public class steeringRotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.eulerAngles = new Vector3(0, -90 * Input.GetAxis("LeftJoystickX_P") + 180, 0);	
+        transform.eulerAngles = new Vector3(0, -45 * Input.GetAxis("LeftJoystickX_P") + 180, 0);	
 	}
 }

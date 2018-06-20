@@ -11,6 +11,9 @@ public class scoring : MonoBehaviour {
     public GameObject roadBlockPopup;
     public GameObject roadConePopup;
     public GameObject blueCarPopup;
+    public GameObject dummyPopup;
+    public GameObject cratePopup;
+    public GameObject pramPopup;
     public GameObject explosionParticle;
     public float comboTimer;
     public static int comboInt;
@@ -72,13 +75,18 @@ public class scoring : MonoBehaviour {
                         comboInt += 1;
                         comboTimer = 3;
                         scream.Play();
-						popupManager.popupQueue.Add(roadConePopup);
+						popupManager.popupQueue.Add(dummyPopup);
                         break;
                     case "box":
                         comboInt += 1;
                         comboTimer = 3;
                         crate.Play();
-						popupManager.popupQueue.Add(roadConePopup);
+						popupManager.popupQueue.Add(cratePopup);
+                        break;
+                    case "pram":
+                        comboInt += 1;
+                        comboTimer = 3;
+                        popupManager.popupQueue.Add(pramPopup);
                         break;
                     default:
                         break;

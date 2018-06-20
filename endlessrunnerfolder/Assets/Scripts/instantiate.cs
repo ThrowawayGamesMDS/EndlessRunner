@@ -9,8 +9,11 @@ public class instantiate : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
 	{
+		if(other.tag == "buildingprefab")
+        {
+            StartCoroutine(instant());
+        }
 		
-		StartCoroutine(instant ());
 	}
 	IEnumerator instant()
 	{
