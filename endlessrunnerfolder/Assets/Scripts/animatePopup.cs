@@ -11,7 +11,7 @@ public class animatePopup : MonoBehaviour {
     void Start()
     {
         StartCoroutine(FadeCanvasGroup(uiElement, uiElement.alpha, 0));
-        Invoke("destroyself", 2f);
+        Invoke("destroyself", 2.5f);
     }
 	
     void Update()
@@ -22,7 +22,7 @@ public class animatePopup : MonoBehaviour {
         
     }
 
-    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerptime = 1.5f)
+    public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerptime = 2f)
     {
         float _timeStartedLerping = Time.time;
         float timeSinceStarted = Time.time - _timeStartedLerping;

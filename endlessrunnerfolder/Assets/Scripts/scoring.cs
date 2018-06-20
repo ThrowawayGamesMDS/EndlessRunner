@@ -14,6 +14,7 @@ public class scoring : MonoBehaviour {
     public GameObject dummyPopup;
     public GameObject cratePopup;
     public GameObject pramPopup;
+    public GameObject binPopup;
     public GameObject explosionParticle;
     public float comboTimer;
     public static int comboInt;
@@ -26,7 +27,7 @@ public class scoring : MonoBehaviour {
     public AudioSource sign;
     public AudioSource roadblock;
     public AudioSource bin;
-
+    public AudioSource pram;
 
 
     private void Start()
@@ -95,6 +96,13 @@ public class scoring : MonoBehaviour {
                         comboInt += 1;
                         comboTimer = 3;
                         popupManager.popupQueue.Add(pramPopup);
+                        pram.Play();
+                        break;
+                    case "bin":
+                        comboInt += 1;
+                        comboTimer = 3;
+                        popupManager.popupQueue.Add(binPopup);
+                        bin.Play();
                         break;
                     default:
                         break;
